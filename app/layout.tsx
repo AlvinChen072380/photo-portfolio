@@ -27,7 +27,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {children} {/* Component Composition (元件組合)的關鍵 */}
       </body>
     </html>
   );
