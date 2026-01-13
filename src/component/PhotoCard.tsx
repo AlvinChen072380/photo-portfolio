@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { Photo } from "../data/photo";
 import Link from "next/link";
+/* import LikeButton from "./LikeButton"; */
 
 interface PhotoCardProps {
   photo: Photo;
+ /*  onLike: () => void; */ //PhotoCard 被迫經手不相關的資料!!prop drilling
 }
 
 export default function PhotoCard({ photo }: PhotoCardProps) {
@@ -26,6 +28,10 @@ export default function PhotoCard({ photo }: PhotoCardProps) {
           <h3 className="text-white font-medium text-lg translate-y-4 transition-transform duration-300 group-hover:translate-y-0">
             {photo.title}
           </h3>
+          {/* prop drilling sample */}
+          {/* <div className="translate-y-4 transition-transform duration-300 group-hover:translate-y-0 delay-75">
+            <LikeButton onLike={onLike}/>
+          </div> */}
         </div>
       </div>
     </Link>

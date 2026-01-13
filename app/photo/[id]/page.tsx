@@ -1,17 +1,54 @@
+// prop drilling sample
+//'use client';
+
 //建立動態資料夾
 import Image from "next/image";
 import Link from "next/link";
 import { photos } from "@/src/data/photo";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+/* import Navbar from "@/src/component/Navbar";
+import { useState } from "react";
+import PhotoCard from "@/src/component/PhotoCard"; */
 
 import LikeButtonClass from "@/src/component/LikeButtonClass";
 import LikeButton from "@/src/component/LikeButton";
 
-
 interface PhotoPageProps {
-  params: Promise<{ id:string }>
+  params: Promise<{ id: string }>;
 }
+
+/* export default function Home() {
+  const [totalLikes, setTotalLikes] = useState(0);
+
+  const handleIncreaseLike = () => {
+    setTotalLikes((prev) => prev + 1 );
+  }
+
+  return (
+    <>
+    
+      <Navbar totalLikes={totalLikes} />
+      
+      <main className="min-h-screen p-8 max-w-7xl mx-auto">
+        <header className="mb-12">
+          <h1 className="text-4xl font-bold mb-4">Gallery</h1>
+          <p className="text-gray-600">Total Likes Collection: {totalLikes}</p>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {photos.map((photo) => (
+            <PhotoCard 
+              key={photo.id} 
+              photo={photo} 
+              // 2. 鑽孔開始：把函式傳給子層
+              onLike={handleIncreaseLike} 
+            />
+          ))}
+        </div>
+      </main>
+    </>
+  ); */
 
 export default async function PhotoPage({ params }: PhotoPageProps) {
   // 1.解開 Promise 取得 id
@@ -34,7 +71,8 @@ export default async function PhotoPage({ params }: PhotoPageProps) {
             href="/"
             className="text-gray-600 hover:text-black flex items-center gap-2 transition-colors"
           >
-            <ArrowLeft/>BacK to Gallery
+            <ArrowLeft />
+            BacK to Gallery
           </Link>
         </div>
 
@@ -60,21 +98,18 @@ export default async function PhotoPage({ params }: PhotoPageProps) {
             </div>
             {/* 後續放蒐藏按鍵 */}
             <div className="flex gap-4 items-center">
-
-                {/* Class Component Version */}
+              {/* Class Component Version */}
               <div className="flex flex-col items-center gap-1">
                 <span className="text-xs text-gray-400">Class (old)</span>
                 <LikeButtonClass />
               </div>
 
-                {/* Function Component version */}
-            
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-xs text-gray-400">Function (New)</span>
-                  <LikeButton />
-                </div>
-            </div>      
-
+              {/* Function Component version */}
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-xs text-gray-400">Function (New)</span>
+                <LikeButton />
+              </div>
+            </div>
           </div>
         </div>
       </div>

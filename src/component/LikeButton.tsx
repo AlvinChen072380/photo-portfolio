@@ -4,6 +4,11 @@
 import { Heart } from "lucide-react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
+// Prop drilling sample
+/* interface LikeButtonProps {
+  onLike?:() => void; // 可選屬性，詳細頁面可能沒回傳
+} */
+
 export default function LikeButton () {
   // 1.使用useState Hook
   // 語法: const [變數名, 修改變數的函式] = useState(初始值);
@@ -50,11 +55,20 @@ export default function LikeButton () {
  */
 
   // 2.定義事件處理函式 (Event Handler)
-  const handleClick = () => {
+  const handleClick = (/* e:React.MouseEvent */) => {
+
+    // prop drilling sample
+    // 阻止事件冒泡! 因為LikeButton 會放在 PhotoCard 裡，而 PhotoCard 外面包著Link
+   /*  e.preventDefault();
+    e.stopPropagation(); */
+
     // 1.鎖定"目標植": 明確定義現在發生了什麼事
     const newLiked = !liked; //這裡算出 true (Single Source of Truth)
     // 2.更新狀態A : 設為 true
     setLiked(newLiked);
+    /* if (onLike && !liked) {
+      onLike();
+    } */
     // 3.更新狀態B : 根據剛剛算出的true 來決定加減
     setCount((prevCount) => (newLiked ? prevCount + 1 : prevCount - 1));
   };

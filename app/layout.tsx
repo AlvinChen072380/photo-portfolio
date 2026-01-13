@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+/* import Navbar from "@/src/component/Navbar";
+ */
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,11 +23,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  //因為layout 是父層，資料 Props 只能向下走不能往回逆流，所以父層無從得知page.tsx的按讚數量!
+  /* const totalLikes = 0; */
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* <Navbar totalLikes={totalLikes}/> */}
         {children} {/* Component Composition (元件組合)的關鍵 */}
       </body>
     </html>
