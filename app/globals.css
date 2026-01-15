@@ -1,27 +1,23 @@
 @import "tailwindcss";
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tailwind v4 覆寫 Dark Mode 策略 
+  這行語法告訴 Tailwind：「嘿，不要看系統設定了，只要看有沒有 .dark 這個 class」
+  在 v4 中，預設的 dark: 是綁定 系統偏好 (System Preference) 的。當你的電腦設定為深色模式，網頁就會變黑，不管你有沒有加 class。我們需要「強制」覆寫這個行為。
+*/
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* 如果你有自定義的 theme 變數可以放這裡 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* 確保你的 body 樣式有正確套用 
+  在這裡明確指定 light 模式下的顏色，以免被系統預設影響
+*/
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-white text-gray-900 transition-colors duration-300;
 }
- */
+
+/* 當 HTML 有 .dark 時，Body 變成黑色 */
+:root.dark body {
+  @apply bg-gray-950 text-gray-100;
+}

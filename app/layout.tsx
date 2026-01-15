@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Navbar from "@/src/component/Navbar";
 import "./globals.css";
+
+import { ThemeProvider } from "@/src/context/ThemeContext";
 /* import Navbar from "@/src/component/Navbar";
  */
 const geistSans = Geist({
@@ -29,9 +32,11 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* <Navbar totalLikes={totalLikes}/> */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300`}>
+        <ThemeProvider>
+        <Navbar /* totalLikes={totalLikes} *//>
         {children} {/* Component Composition (元件組合)的關鍵 */}
+        </ThemeProvider>
       </body>
     </html>
   );
