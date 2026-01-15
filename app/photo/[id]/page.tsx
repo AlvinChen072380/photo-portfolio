@@ -7,6 +7,7 @@ import Link from "next/link";
 import { photos } from "@/src/data/photo";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import ContactForm from "@/src/component/ContactForm";
 /* import Navbar from "@/src/component/Navbar";
 import { useState } from "react";
 import PhotoCard from "@/src/component/PhotoCard"; */
