@@ -5,15 +5,26 @@ import Link from "next/link";
 
 interface PhotoCardProps {
   photo: Photo;
- /*  onLike: () => void; */ //PhotoCard 被迫經手不相關的資料!!prop drilling
+  /*  onLike: () => void; */ //PhotoCard 被迫經手不相關的資料!!prop drilling
+  onClick?: (Photo: Photo) => void;
 }
 
-export default function PhotoCard({ photo }: PhotoCardProps) {
+export default function PhotoCard({ photo, onClick }: PhotoCardProps) {
   return (
     // group class 是 Tailwind 的功能，讓子元素可以根據父層狀態改變樣式
     // aspect-square > aspect-ratio: 1 / 1 適合用來處理RWD
     // 圖片包裹Link 成為連結，不用 <a> tag
-    <Link href={`/photo/${photo.id}`} className="block">
+    <Link 
+      href={`/photo/${photo.id}`} 
+      className="block"
+      // 阻止Link觸發預設連結邏輯: 事件攔截 (Intercept)
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault(); // 1.阻止<Link> 的預設換頁行為
+          onClick(photo); // 2.換而執行我們自定義的動作
+        }
+      }}
+    >
       <div className="group relative aspect-square overflow-hidden rounded-xl bg-gray-100 cursor-pointer">
         <Image
           src={photo.url}
