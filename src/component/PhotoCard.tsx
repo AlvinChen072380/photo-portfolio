@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { Photo } from "../data/photo";
 import Link from "next/link";
-/* import LikeButton from "./LikeButton"; */
+import LikeButton from "./LikeButton";
+import { memo } from "react";
 
 interface PhotoCardProps {
   photo: Photo;
@@ -9,7 +10,7 @@ interface PhotoCardProps {
   onClick?: (Photo: Photo) => void;
 }
 
-export default function PhotoCard({ photo, onClick }: PhotoCardProps) {
+function PhotoCard({ photo, onClick }: PhotoCardProps) {
   return (
     // group class 是 Tailwind 的功能，讓子元素可以根據父層狀態改變樣式
     // aspect-square > aspect-ratio: 1 / 1 適合用來處理RWD
@@ -35,16 +36,22 @@ export default function PhotoCard({ photo, onClick }: PhotoCardProps) {
         />
 
         {/* 漸層遮罩與標題 - hover 時才會出現 */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-4">
+        <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-4 justify-between">
           <h3 className="text-white font-medium text-lg translate-y-4 transition-transform duration-300 group-hover:translate-y-0">
             {photo.title}
           </h3>
-          {/* prop drilling sample */}
-          {/* <div className="translate-y-4 transition-transform duration-300 group-hover:translate-y-0 delay-75">
-            <LikeButton onLike={onLike}/>
-          </div> */}
+          {/* prop drilling sample */}     
+          <div className="translate-y-4 transition-transform duration-300 group-hover:translate-y-0 delay-75 cursor-pointer">
+            <LikeButton photoId={photo.id}/>
+          </div>     
         </div>
+        
       </div>
     </Link>
   );
 }
+
+export default memo(PhotoCard);
+// 在匯出時，用 memo 包起來
+// 這就像是說：「請記住這個元件，如果 props 沒變，就直接拿上次畫好的結果出來用」
+

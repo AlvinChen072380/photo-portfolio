@@ -4,6 +4,7 @@ import Navbar from "@/src/component/Navbar";
 import "./globals.css";
 
 import { ThemeProvider } from "@/src/context/ThemeContext";
+import { LikesProvider } from "@/src/context/LikesContext";
 /* import Navbar from "@/src/component/Navbar";
  */
 const geistSans = Geist({
@@ -34,8 +35,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300`}>
         <ThemeProvider>
-        <Navbar /* totalLikes={totalLikes} *//>
-        {children} {/* Component Composition (元件組合)的關鍵 */}
+          <LikesProvider>
+            <Navbar /* totalLikes={totalLikes} *//>
+            {children} {/* Component Composition (元件組合)的關鍵 */}
+          </LikesProvider>
         </ThemeProvider>
       </body>
     </html>

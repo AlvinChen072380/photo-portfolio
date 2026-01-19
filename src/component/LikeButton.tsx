@@ -3,20 +3,34 @@
 //import { useState, useEffect, useRef } from "react";
 import { Heart } from "lucide-react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLikes } from "../context/LikesContext";
 
 // Prop drilling sample
 /* interface LikeButtonProps {
   onLike?:() => void; // 可選屬性，詳細頁面可能沒回傳
 } */
+  interface LikeButtonProps {
+    photoId: string; 
+  }
 
-export default function LikeButton () {
+export default function LikeButton ({ photoId }: LikeButtonProps) {
   // 1.使用useState Hook
   // 語法: const [變數名, 修改變數的函式] = useState(初始值);
   /* const [liked, setLiked] = useState(false);
   const [count, setCount] = useState(0); */
   // import Custom Hook LocalStorage
-  const [liked, setLiked] = useLocalStorage<boolean>('isLike_func', false);
-  const [count, setCount] = useLocalStorage<number>('like_count', 0);
+  // 關鍵修正: Key 加上 photoId，變成 'liked1', 'like_2'...
+  //const [liked, setLiked] = useLocalStorage<boolean>(`liked_${photoId}`, false);
+  // 計數器也可以變成獨立計數
+  //const [count, setCount] = useLocalStorage<number>(`count_${photoId}`, 0);
+
+  // 從全域 Context 取得資料與方法
+  const { isLiked, toggleLike } = useLikes();
+
+  // 取得目前這張照片的狀態
+  const liked = isLiked(photoId);
+
+
 
   // 2-1-1: 建立一個 Ref 來當作"旗標"，預設為 true (代表現在是第一次)
   // useRef 的特點 : 數值改變時 "不會" 觸發重新渲染
@@ -55,22 +69,23 @@ export default function LikeButton () {
  */
 
   // 2.定義事件處理函式 (Event Handler)
-  const handleClick = (/* e:React.MouseEvent */) => {
+  const handleClick = (e:React.MouseEvent) => {
 
     // prop drilling sample
     // 阻止事件冒泡! 因為LikeButton 會放在 PhotoCard 裡，而 PhotoCard 外面包著Link
-   /*  e.preventDefault();
-    e.stopPropagation(); */
+    e.preventDefault();
+    e.stopPropagation(); 
+    toggleLike(photoId); // 發送指令
 
     // 1.鎖定"目標植": 明確定義現在發生了什麼事
-    const newLiked = !liked; //這裡算出 true (Single Source of Truth)
+    //const newLiked = !liked; //這裡算出 true (Single Source of Truth)
     // 2.更新狀態A : 設為 true
-    setLiked(newLiked);
+    //setLiked(newLiked);
     /* if (onLike && !liked) {
       onLike();
     } */
     // 3.更新狀態B : 根據剛剛算出的true 來決定加減
-    setCount((prevCount) => (newLiked ? prevCount + 1 : prevCount - 1));
+    //setCount((prevCount) => (newLiked ? prevCount + 1 : prevCount - 1));
   };
 
  /*  const handleClick = () => {
@@ -86,15 +101,14 @@ export default function LikeButton () {
   return (
     <button
       onClick={handleClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded=full transition-colors border ${
+      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors border cursor-pointer ${
         liked
           ? 'bg-red-50 border-red-200 text-red-500'
           : 'br-white border0gray-200 text-gray-600 hover:br-gray-50'
         }`}
     >
       <Heart className={`w-5 h-5 ${liked ? 'fill-current' : "" }`}/>
-      <span className="font-medium">{count} Likes</span>
+      <span className="font-medium text-sm">{liked ? 'Liked' : 'Like'}</span>
     </button>
-
-  )
+  );
 }

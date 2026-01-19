@@ -101,14 +101,14 @@ export default async function PhotoPage({ params }: PhotoPageProps) {
             <div className="flex gap-4 items-center">
               {/* Class Component Version */}
               <div className="flex flex-col items-center gap-1">
-                <span className="text-xs text-gray-400">Class (old)</span>
-                <LikeButtonClass />
+                <span className="text-xs text-gray-400"></span>
+               {/*  <LikeButtonClass /> */}
               </div>
 
               {/* Function Component version */}
               <div className="flex flex-col items-center gap-1">
-                <span className="text-xs text-gray-400">Function (New)</span>
-                <LikeButton />
+                <span className="text-xs text-gray-400"></span>
+                <LikeButton photoId={photo.id} />
               </div>
             </div>
           </div>
