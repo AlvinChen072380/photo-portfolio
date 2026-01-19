@@ -8,7 +8,7 @@ export interface Photo {
 }
 
 // 2. 建立假資料 ( Mock Data )
-export const photos: Photo[] = [
+/* export const photos: Photo[] = [
   {
     id: '1',
     url: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
@@ -45,4 +45,28 @@ export const photos: Photo[] = [
     title: 'Modern Workspace',
     category: 'Work'
   }
+]; */
+
+// 原始輪播種子圖片
+const seedPhotos: Omit<Photo, 'id'>[] =[
+  { url: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=500&q=60', title: 'Camera Lens', category: 'Equipment' },
+  { url: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=60', title: 'Photography Studio', category: 'Studio' },
+  { url: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=500&q=60', title: 'Film Rolls', category: 'Equipment' },
+  { url: 'https://images.unsplash.com/photo-1500634245200-e5245c7574ef?auto=format&fit=crop&w=500&q=60', title: 'Nature Shot', category: 'Nature' },
+  { url: 'https://images.unsplash.com/photo-1493863641943-9b68992a8d07?auto=format&fit=crop&w=500&q=60', title: 'Old Camera', category: 'Vintage' },
+  { url: 'https://images.unsplash.com/photo-1552168324-d612d77725e3?auto=format&fit=crop&w=500&q=60', title: 'Modern Workspace', category: 'Work' }
 ];
+
+function generatePhotos(count: number): Photo[] {
+  return Array.from({ length: count }, (_, index) => {
+    const seed = seedPhotos[index % seedPhotos.length];
+    return {
+      id: String(index + 1),
+      url: seed.url,
+      title: `${seed.title} ${index + 1}`,
+      category: seed.category,
+    };
+  });
+}
+
+export const photos = generatePhotos(1000);

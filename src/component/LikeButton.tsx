@@ -2,8 +2,9 @@
 
 //import { useState, useEffect, useRef } from "react";
 import { Heart } from "lucide-react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { useLikes } from "../context/LikesContext";
+//import { useLocalStorage } from "../hooks/useLocalStorage";
+//import { useLikes } from "../context/LikesContext";
+import { useLikesStore } from "../store/useLikesStores";
 
 // Prop drilling sample
 /* interface LikeButtonProps {
@@ -14,6 +15,13 @@ import { useLikes } from "../context/LikesContext";
   }
 
 export default function LikeButton ({ photoId }: LikeButtonProps) {
+
+  // Zustand 關鍵優化 ( Selector )
+  const liked = useLikesStore((state) => !!state.likes[photoId]);
+
+  // 取得操作方法
+  const toggleLike = useLikesStore((state) => state.toggleLike);
+
   // 1.使用useState Hook
   // 語法: const [變數名, 修改變數的函式] = useState(初始值);
   /* const [liked, setLiked] = useState(false);
@@ -25,10 +33,10 @@ export default function LikeButton ({ photoId }: LikeButtonProps) {
   //const [count, setCount] = useLocalStorage<number>(`count_${photoId}`, 0);
 
   // 從全域 Context 取得資料與方法
-  const { isLiked, toggleLike } = useLikes();
+ // const { isLiked, toggleLike } = useLikes();
 
   // 取得目前這張照片的狀態
-  const liked = isLiked(photoId);
+  //const liked = isLiked(photoId);
 
 
 
