@@ -12,6 +12,11 @@ interface PhotoCardProps {
 }
 
 function PhotoCard({ photo, onClick, priority }: PhotoCardProps) {
+  // Error Boundary test
+ /*  if (photo.id === '5') {
+    throw new Error('Simulation: Photo 5 corrupted!');
+  }
+ */
   return (
     // group class 是 Tailwind 的功能，讓子元素可以根據父層狀態改變樣式
     // aspect-square > aspect-ratio: 1 / 1 適合用來處理RWD

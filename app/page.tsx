@@ -9,6 +9,8 @@ import Modal from "@/src/component/Modal";
 import LikeButton from "@/src/component/LikeButton";
 import { Search } from "lucide-react";
 
+import ErrorBoundary from "@/src/component/ErrorBoundary";
+
 
 const expensiveCalculation = (data: Photo[]) => {
   const start = performance.now();
@@ -75,6 +77,19 @@ export default function Home() {
       </div>
     </header>
 
+    <ErrorBoundary
+      fallback={
+        <div className="py-20 text-center space-y-4">
+          <div className="text-6xl">😵</div>
+          <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300">
+            Gallery temporarily unavailable
+          </h3>
+          <p className="text-gray-500">
+            Some photos are causing issues. Please try refreshing.
+          </p>
+        </div>
+      }
+    >
       {/* photo grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg: grid-cols3 gap-6 mb-20">
         {filteredPhotos.map((photo, index) => (
@@ -94,6 +109,7 @@ export default function Home() {
           </div>
         )}
       </div>
+    </ErrorBoundary>  
 
       {/* Lightbox (重用 Modal) */}
       <Modal
