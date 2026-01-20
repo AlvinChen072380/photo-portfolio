@@ -4,7 +4,9 @@
 import { Heart } from "lucide-react";
 //import { useLocalStorage } from "../hooks/useLocalStorage";
 //import { useLikes } from "../context/LikesContext";
-import { useLikesStore } from "../store/useLikesStores";
+//import { useLikesStore } from "../store/useLikesStores";
+import { useAppStore } from "../store/useAppStore";
+import { useEffect, useState } from "react";
 
 // Prop drilling sample
 /* interface LikeButtonProps {
@@ -16,11 +18,13 @@ import { useLikesStore } from "../store/useLikesStores";
 
 export default function LikeButton ({ photoId }: LikeButtonProps) {
 
+  const [isMounted, setIsMounted] = useState(false);
+
   // Zustand 關鍵優化 ( Selector )
-  const liked = useLikesStore((state) => !!state.likes[photoId]);
+  const liked = useAppStore((state) => !!state.likes[photoId]);
 
   // 取得操作方法
-  const toggleLike = useLikesStore((state) => state.toggleLike);
+  const toggleLike = useAppStore((state) => state.toggleLike);
 
   // 1.使用useState Hook
   // 語法: const [變數名, 修改變數的函式] = useState(初始值);
@@ -38,7 +42,9 @@ export default function LikeButton ({ photoId }: LikeButtonProps) {
   // 取得目前這張照片的狀態
   //const liked = isLiked(photoId);
 
-
+ useEffect(() => {
+  setIsMounted(true);
+ }, []);
 
   // 2-1-1: 建立一個 Ref 來當作"旗標"，預設為 true (代表現在是第一次)
   // useRef 的特點 : 數值改變時 "不會" 觸發重新渲染
@@ -105,7 +111,14 @@ export default function LikeButton ({ photoId }: LikeButtonProps) {
     // 寫法 B: 使用 callback 確保拿到最新的值 (這在非同步更新時更安全)
     setCount((prevCount) => (liked ? prevCount - 1 : prevCount + 1));
   }; */
-
+  if (!isMounted) {
+    return (
+      <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-100 bg-gray-50 opacity-50 cursor-wait">
+        <Heart className="w-5 h-5 text-gray-300"/>
+        <span className="font-medium text-sm text-gray-300">Like</span>
+      </div>
+    );
+  }
   return (
     <button
       onClick={handleClick}

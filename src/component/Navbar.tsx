@@ -2,16 +2,21 @@
 
 import Link from "next/link";
 import { Camera, Moon, Sun, Info } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
+//import { useTheme } from "../context/ThemeContext";
 import { useState } from "react";
 import Modal from "./Modal";
+import { useAppStore } from "../store/useAppStore";
 
 /* interface NavbarProps {
   totalLikes: number;
 } */
 
 export default function Navbar(/* { totalLikes }:NavbarProps */) {
-  const { theme, toggleTheme } = useTheme();
+
+  // Selector 優化: Navbar 只訂閱 theme & toggleTheme
+  // 其餘部件不會因為這裡改變而執行重繪
+  const theme = useAppStore((state) => state.theme);
+  const toggleTheme = useAppStore((state) => state.toggleTheme);
 
   // 1.控制 Modal 開關的狀態
   const [isAboutOpen, setIsAboutOpen] = useState(false);

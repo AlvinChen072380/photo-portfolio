@@ -14,7 +14,7 @@
   在這裡明確指定 light 模式下的顏色，以免被系統預設影響
 */
 body {
-  @apply bg-white text-gray-900 transition-colors duration-300;
+  @apply bg-white text-gray-900 /* transition-colors duration-300 */;
 }
 
 /* 當 HTML 有 .dark 時，Body 變成黑色 */

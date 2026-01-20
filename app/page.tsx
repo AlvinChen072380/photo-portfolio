@@ -77,12 +77,13 @@ export default function Home() {
 
       {/* photo grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg: grid-cols3 gap-6 mb-20">
-        {filteredPhotos.map((photo) => (
+        {filteredPhotos.map((photo, index) => (
           <PhotoCard 
             key={photo.id} 
             photo={photo}
             // 傳入 onClick，這會啟動 PhotoCard 裡的 e.preventDefault()
             onClick={/* (p) => setSelectedPhoto(p)  */ handlePhotoClick}
+            priority={index < 4}
           />
         ))}
 

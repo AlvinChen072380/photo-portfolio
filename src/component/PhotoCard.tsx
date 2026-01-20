@@ -8,9 +8,10 @@ interface PhotoCardProps {
   photo: Photo;
   /*  onLike: () => void; */ //PhotoCard 被迫經手不相關的資料!!prop drilling
   onClick?: (Photo: Photo) => void;
+  priority?: boolean;
 }
 
-function PhotoCard({ photo, onClick }: PhotoCardProps) {
+function PhotoCard({ photo, onClick, priority }: PhotoCardProps) {
   return (
     // group class 是 Tailwind 的功能，讓子元素可以根據父層狀態改變樣式
     // aspect-square > aspect-ratio: 1 / 1 適合用來處理RWD
@@ -33,6 +34,7 @@ function PhotoCard({ photo, onClick }: PhotoCardProps) {
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-110"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={priority}
         />
 
         {/* 漸層遮罩與標題 - hover 時才會出現 */}
