@@ -51,5 +51,5 @@ useLikesStore.subscribe((state) => {
   saveTimer = setTimeout(() => {
     console.log('💾 Saving to LocalStorage... (Debounced)');
     localStorage.setItem('photo_likes_store', JSON.stringify(currentLikes));
-  }, 1000);
+  }, 500);
 });
