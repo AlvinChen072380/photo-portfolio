@@ -2,15 +2,18 @@ import { create } from "zustand";
 import { createThemeSlice, ThemeSlice } from "./slices/createThemeSlice";
 import { createLikesSlice, LikesSlice } from "./slices/createLikeSlice";
 
+import { createCartSlice, CartSlice } from "./slices/createCartSlice";
+
 // 1.定義總 Store 的型別 (包含所有 Slices)
 // 使用 & (Intersection Type) 把所有介面黏在一起
-export type AppState = ThemeSlice & LikesSlice;
+export type AppState = ThemeSlice & LikesSlice & CartSlice;
 
 // 2.建立 Store
 export const useAppStore = create<AppState>()((...a) => ({
   // 使用 Spread Operator 把 Slice 的功能展開進來
   ...createThemeSlice(...a),
   ...createLikesSlice(...a),
+  ...createCartSlice(...a),
 }));
 
 
@@ -46,5 +49,17 @@ useAppStore.subscribe((state, prevState) => {
   saveTimer = setTimeout(() => {
     console.log('💾 Saving Likes to LocalStorage... (Debounced)');
     localStorage.setItem('photo_likes_store', JSON.stringify(state.likes));    
-  }, 1000);
+  }, 1000);  
+});
+
+let cartSaveTimer: NodeJS.Timeout | null = null;
+
+useAppStore.subscribe((state, prevState) =>{
+  if (state.cart === prevState.cart) return;
+
+  if (cartSaveTimer) clearTimeout(cartSaveTimer);
+  cartSaveTimer = setTimeout(() => {
+    console.log('🛒 Saving Cart to LocalStorage... (Debounced)');
+    localStorage.setItem('shopping_cart', JSON.stringify(state.cart));    
+  }, 1000)
 });

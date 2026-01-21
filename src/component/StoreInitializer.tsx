@@ -9,6 +9,8 @@ export default function StoreInitializer() {
   const initLikes = useAppStore((state) => state.initLikes);
   const setTheme = useAppStore((state) => state.setTheme);
 
+  const initCart = useAppStore((state) => state.initCart);
+
   useEffect(() => {
     if (!initialized.current) {
       if (typeof window !== 'undefined') {
@@ -28,9 +30,19 @@ export default function StoreInitializer() {
 
           document.documentElement.classList.toggle('dark', storedTheme === 'dark')
         }
+        // 初始化 Cart
+        const storedCart = localStorage.getItem('shopping_cart');
+        if (storedCart) {
+          try {
+            initCart(JSON.parse(storedCart));
+          } catch (e) {
+            console.error('Failed to parse cart' , e)
+          }
+        }
       }
       initialized.current = true;
     }
-  }, [initLikes, setTheme]);
+  }, [initLikes, setTheme, initCart]);
+  
   return null;
 }

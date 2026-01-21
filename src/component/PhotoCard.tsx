@@ -3,6 +3,8 @@ import { Photo } from "../data/photo";
 import Link from "next/link";
 import LikeButton from "./LikeButton";
 import { memo } from "react";
+import { useAppStore } from "../store/useAppStore";
+import { Plus } from "lucide-react";
 
 interface PhotoCardProps {
   photo: Photo;
@@ -11,12 +13,20 @@ interface PhotoCardProps {
   priority?: boolean;
 }
 
-function PhotoCard({ photo, onClick, priority }: PhotoCardProps) {
+function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
   // Error Boundary test
  /*  if (photo.id === '5') {
     throw new Error('Simulation: Photo 5 corrupted!');
   }
  */
+  const addToCart = useAppStore((state) => state.addToCart);
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(photo);
+  };
+
   return (
     // group class 是 Tailwind 的功能，讓子元素可以根據父層狀態改變樣式
     // aspect-square > aspect-ratio: 1 / 1 適合用來處理RWD
@@ -32,7 +42,7 @@ function PhotoCard({ photo, onClick, priority }: PhotoCardProps) {
         }
       }}
     >
-      <div className="group relative aspect-square overflow-hidden rounded-xl bg-gray-100 cursor-pointer">
+      <div className="group relative aspect-square overflow-hidden rounded-xl bg-gray-100 ">
         <Image
           src={photo.url}
           alt={photo.title}
@@ -48,11 +58,19 @@ function PhotoCard({ photo, onClick, priority }: PhotoCardProps) {
             {photo.title}
           </h3>
           {/* prop drilling sample */}     
-          <div className="translate-y-4 transition-transform duration-300 group-hover:translate-y-0 delay-75 cursor-pointer">
-            <LikeButton photoId={photo.id}/>
-          </div>     
-        </div>
-        
+          <div className=" relative translate-y-4 pr-12 transition-transform duration-300 group-hover:translate-y-0 delay-75 ">           
+              <LikeButton photoId={photo.id} />                           
+          </div>   
+
+          {/* 加入購物車按鈕 */}         
+            <button
+              onClick={handleAddToCart}
+              className="absolute bottom-4 right-4 p-2 bg-white text-black rounded-full shadow-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-800 hover:text-white"
+              title="Add to Cart"
+            >
+              <Plus className="w-5 h-5"/>
+            </button>               
+        </div>        
       </div>
     </Link>
   );

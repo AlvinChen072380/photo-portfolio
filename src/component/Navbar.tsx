@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { Camera, Moon, Sun, Info } from "lucide-react";
 //import { useTheme } from "../context/ThemeContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import { useAppStore } from "../store/useAppStore";
+import { ShoppingCart } from "lucide-react";
+
 
 /* interface NavbarProps {
   totalLikes: number;
@@ -18,8 +20,14 @@ export default function Navbar(/* { totalLikes }:NavbarProps */) {
   const theme = useAppStore((state) => state.theme);
   const toggleTheme = useAppStore((state) => state.toggleTheme);
 
+  const openCart = useAppStore((state) =>state.openCart);
+  const cartCount = useAppStore((state) => 
+    state.cart.reduce((acc, item) => acc + item.quantity, 0));
+
   // 1.控制 Modal 開關的狀態
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <>
@@ -50,6 +58,21 @@ export default function Navbar(/* { totalLikes }:NavbarProps */) {
               aria-label="About"
             >
               <Info className="w-5 h-5" />
+            </button>
+
+            {/* Cart Button */}
+            <button
+              onClick={openCart}
+              className="relative p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+            >
+              <ShoppingCart  className="w-5 h-5 text-gray-600 dark:text-gray-300 cursor-pointer"/>
+
+              {/* 紅色徽章 (Badge) */}
+              {mounted && cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
             </button>
 
             {/* toggle button */}

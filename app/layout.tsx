@@ -8,6 +8,8 @@ import StoreInitializer from "@/src/component/StoreInitializer";
 //import { LikesProvider } from "@/src/context/LikesContext";
 /* import Navbar from "@/src/component/Navbar";
  */
+import CartDrawer from "@/src/component/CartDrawer";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -53,6 +55,7 @@ export default function RootLayout({
              
             <StoreInitializer /> {/* 初始化元件 */}   
             <Navbar /* totalLikes={totalLikes} *//>
+            <CartDrawer />
             {children} {/* Component Composition (元件組合)的關鍵 */}         
       </body>
     </html>
