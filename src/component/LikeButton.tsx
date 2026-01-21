@@ -20,10 +20,10 @@ export default function LikeButton ({ photoId }: LikeButtonProps) {
 
   const [isMounted, setIsMounted] = useState(false);
 
-  // Zustand 關鍵優化 ( Selector )
+  // Zustand 關鍵優化 ( Selector選擇器 )
   const liked = useAppStore((state) => !!state.likes[photoId]);
 
-  // 取得操作方法
+  // 取得操作方法 selector選擇器
   const toggleLike = useAppStore((state) => state.toggleLike);
 
   // 1.使用useState Hook
@@ -122,7 +122,7 @@ export default function LikeButton ({ photoId }: LikeButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors border cursor-pointer ${
+      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors border cursor-pointer duration-300 hover:bg-gray-300 ${
         liked
           ? 'bg-red-50 border-red-200 text-red-500'
           : 'br-white border0gray-200 text-gray-600 hover:br-gray-50'

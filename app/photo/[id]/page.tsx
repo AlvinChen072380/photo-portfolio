@@ -106,8 +106,8 @@ export default async function PhotoPage({ params }: PhotoPageProps) {
               </div>
 
               {/* Function Component version */}
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-xs text-gray-400"></span>
+              <div className="flex flex-col items-center rounded-full transition-colors duration-300 hover:bg-gray-300">
+                <span className="text-xs text-gray-400 "></span>
                 <LikeButton photoId={photo.id} />
               </div>
             </div>
