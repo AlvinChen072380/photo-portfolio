@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import { useAppStore } from "../store/useAppStore";
 import { ShoppingCart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 
 /* interface NavbarProps {
@@ -68,11 +69,20 @@ export default function Navbar(/* { totalLikes }:NavbarProps */) {
               <ShoppingCart  className="w-5 h-5 text-gray-600 dark:text-gray-300 cursor-pointer"/>
 
               {/* 紅色徽章 (Badge) */}
+              <AnimatePresence>
               {mounted && cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                <motion.span 
+                  key={cartCount} // 更新觸發動畫
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 25 }}
+
+                  className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
                   {cartCount}
-                </span>
+                </motion.span>
               )}
+              </AnimatePresence>
             </button>
 
             {/* toggle button */}

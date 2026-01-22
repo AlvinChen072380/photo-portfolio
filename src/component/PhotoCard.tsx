@@ -5,6 +5,7 @@ import LikeButton from "./LikeButton";
 import { memo } from "react";
 import { useAppStore } from "../store/useAppStore";
 import { Plus } from "lucide-react";
+import { motion } from "framer-motion";  
 
 interface PhotoCardProps {
   photo: Photo;
@@ -63,13 +64,16 @@ function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
           </div>   
 
           {/* 加入購物車按鈕 */}         
-            <button
+            <motion.button
               onClick={handleAddToCart}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
               className="absolute bottom-4 right-4 p-2 bg-white text-black rounded-full shadow-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-800 hover:text-white"
               title="Add to Cart"
             >
               <Plus className="w-5 h-5"/>
-            </button>               
+            </motion.button>               
         </div>        
       </div>
     </Link>
