@@ -1,5 +1,6 @@
 import { StateCreator } from "zustand";
 import { Photo } from "@/src/data/photo";
+import { AppState} from "../useAppStore";
 
 // 1.定義購物車內的單一商品結構
 export interface CartItem {
@@ -28,7 +29,7 @@ export interface CartSlice {
 
 // 3. 實作邏輯
 
-export const createCartSlice: StateCreator<any, [], [], CartSlice> = (set) => ({
+export const createCartSlice: StateCreator<AppState, [], [], CartSlice> = (set) => ({
   cart: [], // 購物車初始為空陣列
   isCartOpen: false,
 
