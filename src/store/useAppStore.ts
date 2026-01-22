@@ -3,10 +3,11 @@ import { createThemeSlice, ThemeSlice } from "./slices/createThemeSlice";
 import { createLikesSlice, LikesSlice } from "./slices/createLikeSlice";
 
 import { createCartSlice, CartSlice } from "./slices/createCartSlice";
+import { BackgroundSlice, createBackgroundSlice } from "./slices/createBackgroundSlice";
 
 // 1.定義總 Store 的型別 (包含所有 Slices)
 // 使用 & (Intersection Type) 把所有介面黏在一起
-export type AppState = ThemeSlice & LikesSlice & CartSlice;
+export type AppState = ThemeSlice & LikesSlice & CartSlice & BackgroundSlice;
 
 // 2.建立 Store
 export const useAppStore = create<AppState>()((...a) => ({
@@ -14,6 +15,7 @@ export const useAppStore = create<AppState>()((...a) => ({
   ...createThemeSlice(...a),
   ...createLikesSlice(...a),
   ...createCartSlice(...a),
+  ...createBackgroundSlice(...a),
 }));
 
 

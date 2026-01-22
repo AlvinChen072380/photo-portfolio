@@ -87,6 +87,7 @@ export default function CartDrawer() {
                     {/* <span className="font-bold">${50 * item.quantity}</span> */}
                     <button
                       onClick={() => removeFromCart(item.photo.id)}
+                      title="Remove item from cart"
                       className="absolute top-5 right-5 text-red-500/50 text-sm hover:underline cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4"/> 
