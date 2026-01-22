@@ -44,20 +44,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   //因為layout 是父層，資料 Props 只能向下走不能往回逆流，所以父層無從得知page.tsx的按讚數量!
   /* const totalLikes = 0; */
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 `}>
-        <script 
-          dangerouslySetInnerHTML={{ __html: themeScript }}/>
-            <AmbientBackground />
-            <StoreInitializer /> {/* 初始化元件 */}   
-            <Navbar /* totalLikes={totalLikes} *//>
-            <CartDrawer />
-            {children} {/* Component Composition (元件組合)的關鍵 */}         
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 `}
+      >
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <AmbientBackground />
+        <StoreInitializer /> {/* 初始化元件 */}
+        <Navbar /* totalLikes={totalLikes} */ />
+        <CartDrawer />
+        {children} {/* Component Composition (元件組合)的關鍵 */}
+        
+        <footer className="py-6 text-center text-xs text-gray-500 dark:text-gray-400">
+          <p>
+            © {new Date().getFullYear()} My Magic Shop. Built for educational
+            purposes.
+          </p>
+          <p>Image assets are property of their respective owners.</p>
+        </footer>
       </body>
     </html>
   );
