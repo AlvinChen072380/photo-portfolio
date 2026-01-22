@@ -60,8 +60,8 @@ export default function Home() {
   return (
    <main className="min-h-screen p-8 max-w-7xl mx-auto">
     <header className="mb-12">
-      <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Gallery</h1>
-      <p className="text-gray-600 dark:text-gray-400">Explore the collection.</p>
+      <h1 className="text-4xl font-bold mb-4 text-gray-200 dark:text-white">Gallery</h1>
+      <p className="text-gray-400 dark:text-gray-400">Explore the collection.</p>
 
       {/*  Phase4. 搜尋框 */}
       <div className="relative max-w-md pt-3">

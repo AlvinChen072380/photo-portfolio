@@ -10,14 +10,27 @@
   /* 如果你有自定義的 theme 變數可以放這裡 */
 }
 
-/* 確保你的 body 樣式有正確套用 
-  在這裡明確指定 light 模式下的顏色，以免被系統預設影響
-*/
+
+/* 1. 預設狀態 (Light Mode) */
 body {
-  @apply bg-white text-gray-900 /* transition-colors duration-300 */;
+  background-color: transparent; /* 讓背景圖透出來 */
+  @apply text-gray-900 transition-colors duration-300;
 }
 
-/* 當 HTML 有 .dark 時，Body 變成黑色 */
+/* 2. 強制深色模式 (Dark Mode) */
+/* 使用 :global(.dark) 或是直接 .dark body 確保權重 */
 :root.dark body {
-  @apply bg-gray-950 text-gray-100;
+  background-color: transparent; /* 確保這裡也是透明 */
+  @apply text-gray-100; /* 強制文字變白 */
+}
+
+/* 針對 Chrome, Safari 和 Edge (WebKit 引擎) */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* 針對 Firefox 和 IE/Edge (舊版) */
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

@@ -65,7 +65,7 @@ export default function CartDrawer() {
           ): (
             cart.map((item) => (
               <div key={item.photo.id} 
-                    className="relative flex gap-4 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                    className="relative flex gap-4 p-3 bg-gray-200 dark:bg-gray-800/50 rounded-lg">
                 {/* 縮圖 */}
                 <div 
                   className="relative w-25 h-25 shrink-0 bg-gray-200 rounded-md overflow-hidden">
@@ -88,7 +88,7 @@ export default function CartDrawer() {
                     <button
                       onClick={() => removeFromCart(item.photo.id)}
                       title="Remove item from cart"
-                      className="absolute top-5 right-5 text-red-500/50 text-sm hover:underline cursor-pointer"
+                      className="absolute top-5 right-5 text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4"/> 
                     </button>

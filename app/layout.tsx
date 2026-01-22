@@ -9,6 +9,7 @@ import StoreInitializer from "@/src/component/StoreInitializer";
 /* import Navbar from "@/src/component/Navbar";
  */
 import CartDrawer from "@/src/component/CartDrawer";
+import AmbientBackground from "@/src/component/AmbientBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,7 +53,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 `}>
         <script 
           dangerouslySetInnerHTML={{ __html: themeScript }}/>
-             
+            <AmbientBackground />
             <StoreInitializer /> {/* 初始化元件 */}   
             <Navbar /* totalLikes={totalLikes} *//>
             <CartDrawer />

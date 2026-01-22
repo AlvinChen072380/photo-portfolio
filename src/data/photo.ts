@@ -49,12 +49,63 @@ export interface Photo {
 
 // 原始輪播種子圖片
 const seedPhotos: Omit<Photo, 'id'>[] =[
-  { url: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=500&q=60', title: 'Camera Lens', category: 'Equipment' },
+ /*  { url: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=500&q=60', title: 'Camera Lens', category: 'Equipment' },
   { url: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=60', title: 'Photography Studio', category: 'Studio' },
   { url: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=500&q=60', title: 'Film Rolls', category: 'Equipment' },
   { url: 'https://images.unsplash.com/photo-1500634245200-e5245c7574ef?auto=format&fit=crop&w=500&q=60', title: 'Nature Shot', category: 'Nature' },
   { url: 'https://images.unsplash.com/photo-1493863641943-9b68992a8d07?auto=format&fit=crop&w=500&q=60', title: 'Old Camera', category: 'Vintage' },
-  { url: 'https://images.unsplash.com/photo-1552168324-d612d77725e3?auto=format&fit=crop&w=500&q=60', title: 'Modern Workspace', category: 'Work' }
+  { url: 'https://images.unsplash.com/photo-1552168324-d612d77725e3?auto=format&fit=crop&w=500&q=60', title: 'Modern Workspace', category: 'Work' } */
+   { 
+        url: '/images/items/shire.jpg', 
+    title: 'The Holy place', 
+    category: 'fanart' 
+  },
+  {     
+    url: '/images/items/sun.jpg', 
+    title: 'The Beginning', 
+    category: 'fanart' 
+  },
+  {     
+    url: '/images/items/rivendell.jpg', 
+    title: 'Kingdom of Middle-earth', 
+    category: 'fanart' 
+  },
+  
+  { 
+    url: '/images/items/night.jpg', 
+    title: 'Run Away', 
+    category: 'fanart' 
+  },
+  { 
+    url: '/images/items/mountain.jpg', 
+    title: 'The lonely mountain', 
+    category: 'fanart' 
+  },
+  { 
+    url: '/images/items/mordor.jpg', 
+    title: 'Horn of evil', 
+    category: 'fanart' 
+  },
+  { 
+    url: '/images/items/map.jpg', 
+    title: 'Map', 
+    category: 'fanart' 
+  },
+  { 
+    url: '/images/items/forest.jpg', 
+    title: 'The deep forest', 
+    category: 'fanart' 
+  },
+  { 
+    url: '/images/items/dragon.jpg', 
+    title: 'Shard of dragon', 
+    category: 'fanart' 
+  },
+  { 
+    url: '/images/items/alone.jpg', 
+    title: 'Under the night', 
+    category: 'fanart' 
+  },
 ];
 
 function generatePhotos(count: number): Photo[] {
