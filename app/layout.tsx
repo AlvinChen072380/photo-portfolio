@@ -11,6 +11,8 @@ import StoreInitializer from "@/src/component/StoreInitializer";
 import CartDrawer from "@/src/component/CartDrawer";
 import AmbientBackground from "@/src/component/AmbientBackground";
 
+import Footer from "@/src/component/Footer";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -58,7 +60,7 @@ export default function RootLayout({
         <Navbar /* totalLikes={totalLikes} */ />
         <CartDrawer />
         {children} {/* Component Composition (元件組合)的關鍵 */}
-        
+        {/* <Footer /> */}
         <footer className="py-6 text-center text-xs text-gray-500 dark:text-gray-400">
           <p>
             © {new Date().getFullYear()} My Magic Shop. Built for educational
