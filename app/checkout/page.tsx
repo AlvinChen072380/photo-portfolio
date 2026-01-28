@@ -127,7 +127,7 @@ return (
             <div className="bg-white/80 dark:bg-black/60 backdrop-blur-md p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 sticky top-8">
               <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Order Summary</h2>
 
-              <div className="space-y-4 max-h-100 overflow-y-auto pr-2 no-scrollbar">
+              <div className="space-y-4 max-h-100 overflow-y-auto pr-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {cart.map((item) => (
                   <div key={item.photo.id} className="flex gap-4 py-4 border-b dark:border-gray-800 last:border-0">
                     <div className="relative w-16 h-16 bg-gray-100 rounded-md overflow-hidden shrink-0">

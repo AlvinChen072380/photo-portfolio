@@ -10,6 +10,7 @@ import StoreInitializer from "@/src/component/StoreInitializer";
  */
 import CartDrawer from "@/src/component/CartDrawer";
 import AmbientBackground from "@/src/component/AmbientBackground";
+import ContactForm from "@/src/component/ContactForm";
 
 import Footer from "@/src/component/Footer";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
         <CartDrawer />
         {children} {/* Component Composition (元件組合)的關鍵 */}
         {/* <Footer /> */}
+        <ContactForm/>
         <footer className="py-6 text-center text-xs text-gray-500 dark:text-gray-400">
           <p>
             © {new Date().getFullYear()} My Magic Shop. Built for educational

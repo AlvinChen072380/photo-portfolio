@@ -120,4 +120,4 @@ function generatePhotos(count: number): Photo[] {
   });
 }
 
-export const photos = generatePhotos(1000);
+export const photos = generatePhotos(2500);
