@@ -56,7 +56,7 @@ export default function AmbientBackground() {
             alt={sceneData.alt}
             fill
             priority
-            quality={60}
+            quality={70}
             className="object-cover object-center"
             sizes="100vw"
           />
