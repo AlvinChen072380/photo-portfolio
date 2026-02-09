@@ -5,11 +5,23 @@ import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from 'framer-motion';
 
+type MaxWidth = "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+
+const maxWidthClasses: Record<MaxWidth, string> = {
+  sm: "max-w-sm",
+  md: "max-w-md",
+  lg: "max-w-lg",
+  xl: "max-w-xl",
+  "2xl": "max-w-2xl",
+  full: "max-w-[95vw]",
+}
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
+  maxWidth?: MaxWidth; 
 }
 
 export default function Modal({
@@ -17,14 +29,17 @@ export default function Modal({
   onClose,
   title,
   children,
+  maxWidth = "lg",
 }: ModalProps) {
   // 1.解決SSR問題: 確保只在Client 端渲染
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
 
-    // 當 Modal 打開時，鎖住背景滾動 (Body Lock)
+  useEffect(() => {
+      // 當 Modal 打開時，鎖住背景滾動 (Body Lock)
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -35,7 +50,7 @@ export default function Modal({
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isOpen]);
+  }, [isOpen])  
 
   // 如果沒掛載或是沒打開，就不渲染任何東西
   if (!mounted /* || !isOpen */) return null; //!isOpen 會干擾動畫運作 Early Return
@@ -69,9 +84,13 @@ export default function Modal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-lg border border-gray-100 dark:border-gray-800 pointer-events-auto transform transition-all animate-in fade-in zoom-in-95 duration-200"
+          
+          className={`   
+            w-full ${maxWidthClasses[maxWidth]}         
+            bg-white dark:bg-gray-900 rounded-2xl shadow-2xl  border border-gray-100 dark:border-gray-800 pointer-events-auto transform transition-all animate-in fade-in zoom-in-95 duration-200`}
+
           // 阻止點擊本體時觸發背景關閉 (冒泡)
-          onClick={(e) => e.stopPropagation}
+          onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
@@ -88,7 +107,7 @@ export default function Modal({
           </div>
 
           {/* Content */}
-          <div className="p-6 text-gray-600 dark:text-gray-300">{children}</div>
+          <div className="p-6 text-gray-600 dark:text-gray-300 max-h-[70vh] overflow-y-auto">{children}</div>
         </motion.div>
       </div>
     </>
