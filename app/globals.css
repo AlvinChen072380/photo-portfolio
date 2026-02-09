@@ -34,3 +34,7 @@ body {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+/* .perspective-container {
+  perspective: 1000px;
+} */
