@@ -7,6 +7,12 @@ import PerformanceLab from "@/src/component/ProfileDisplay";
 import Navigation from "@/src/component/Navigation";
 import MenuOverlay from "@/src/component/MenuOverlay";
 import MouseTracker from "@/src/component/MouseTracker";
+import HoverButton from "@/src/component/HoverButton";
+import SpotlightHero from "@/src/component/SpotlightHero";
+import MathLab from "@/src/component/MathLab";
+import MaskLab from "@/src/component/MaskLab";
+import MagneticButton from "@/src/component/MagneticButton";
+import TiltCard from "@/src/component/TiltCard";
 
 export default function Home() {
   // 1. Selectors 選取狀態
@@ -38,6 +44,9 @@ export default function Home() {
 
    return (
     <main className="min-h-screen p-8 bg-slate-50 text-slate-900 flex flex-col items-center gap-10">
+
+
+      <SpotlightHero/>
 
       <Navigation/>
 
@@ -76,6 +85,26 @@ export default function Home() {
         <h2 className="text-xl font-semibold mb-4 border-b pb-2">2. User Slice (Async + Persist)</h2>        
         <MouseTracker />
 
+        <div className="flex flex-col gap-10 items-center justify-center min-h-[50vh]">
+          <h2 className="text-2xl font-bold">Lab 2: 靜默監聽測試區</h2>
+
+          {/* 測試按鈕 */}
+          <HoverButton onClick={() => alert("被點到了!!")}>
+            我是會讓 Nyan Cat 變大的按鈕
+          </HoverButton>
+
+          <div className="p-10 border border-gray-300">
+            普通的區域 (Nyan Cat 應該是原狀)
+          </div>
+
+          <MathLab />
+
+          <MaskLab />
+
+          <MagneticButton />
+
+          <TiltCard />
+        </div>
     
 
         {/* 狀態顯示區 */}

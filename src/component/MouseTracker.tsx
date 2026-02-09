@@ -1,5 +1,6 @@
 import { memo, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useVelocity } from "framer-motion";
+import { useStore } from "../store";
 
 
 /* const MouseContext = createContext({x: new MotionValue(0), y: new MotionValue(0) })
@@ -36,12 +37,53 @@ const MouseTracker = () => {
   const hueRotate = useTransform(x, [0, window.innerWidth], [0, 360]);
   // 把數值組合成 CSS filter 字串
   const filter = useTransform(hueRotate, (h) => `hue-rotate(${h}deg) drop-shadow(2px 4px 6px rgba(0,0,0,0.5))`);
+
   
+  // Lab 2 新增: 狀態變形
+  // 建立一個 "基礎大小" 的 MotionValue
+  // 預設是 1 (正常大小)，碰到按鈕變成 1.5 (放大)，碰到文字變 0.5 (縮小)
+  const baseScale = useMotionValue(1);
+
+  // 為了讓變化平滑，我們也給他加個彈簧
+  const springBaseScale = useSpring(baseScale, { stiffness: 300, damping: 20 });
+
+  // Lab 2 進階混合 最終縮放 = 基礎大小 * 速度拉伸
+  // useTransform 支援多個 MotionValue 的組合運算
+  const finalScaleX = useTransform(
+    [springBaseScale, scaleX],
+    ([base, vel]: number[]) => base * vel
+  );
+  // Lab 2 同步讓 Y 軸也跟著基礎大小縮放 (保持比例)
+  const finalScaleY = springBaseScale;
+
 
    // 4.為了驗證 React 沒有渲染，增加一個 Ref 計數器
   const renderCount = useRef(0);
   // 使用Ref，直接操作 DOM context 來顯示滑鼠移動座標
   const textRef = useRef<HTMLSpanElement>(null); 
+
+
+  // Lab 2 靜脈監聽 (Silent Listening)
+  useEffect(() => {
+    // 這裡我們直接訂閱 Store，而不是在 Component 裡面用 selector
+    // 這樣 Store 更新時，MouseTracker "不會" Re-render
+    const unsubscribe = useStore.subscribe(
+      (state) => state.cursorVariant, // 監聽對象(中間層過濾對象)
+      (variant) => { //要在useStore加入subscribeWithSelector 中間層，才能讓subscribe接收兩個參數
+        // 當 variant 改變時，執行這裡的邏輯callback
+        console.log("游標狀態改變", variant);
+        
+        if (variant === 'button') {
+          baseScale.set(1.5) // 變大
+        } else if (variant === 'text') {
+          baseScale.set(0.5); //變小
+        } else {
+          baseScale.set(1); //恢復原狀
+        }
+      }
+    );
+    return unsubscribe;
+  }, []); //只執行一次
   
   useEffect(() => {
     renderCount.current += 1;
@@ -102,7 +144,8 @@ const MouseTracker = () => {
           translateX: "-120%", //修正中心點
           translateY: "-80%",
           //backgroundColor: color, // 綁定漸變顏色
-          scaleX, // 綁定速度變形
+          scaleX: finalScaleX, // 綁定速度變形
+          scaleY: finalScaleY,
 
           rotate: rotate,
           filter: filter,
