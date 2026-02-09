@@ -1,5 +1,6 @@
 import { useStore } from "../store";
 import { AnimatePresence, motion, Variants } from "framer-motion";
+import Link from "next/link";
 
 
 const MenuOverlay = () => {
@@ -30,8 +31,16 @@ const MenuOverlay = () => {
           <ul className="space-y-8 text-center text-3xl font-bold">
             <li onClick={closeMenu} className="cursor-pointer hover:text-gray-400">Home</li>
             <li onClick={closeMenu} className="cursor-pointer hover:text-gray-400">About</li>
+            
             <li onClick={closeMenu} className="cursor-pointer hover:text-gray-400">Works</li>
             <li onClick={closeMenu} className="cursor-pointer hover:text-gray-400">Contact</li>
+            <Link 
+              href="/about" 
+              className="cursor-pointer hover:text-gray-400"
+              onClick={closeMenu}  
+            >
+              去關於頁測試
+            </Link>
           </ul>
         </motion.div>
       )}
