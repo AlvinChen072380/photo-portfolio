@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/src/component/Navbar";
 import "./globals.css";
+import localFont from "next/font/local";
 
 //import { ThemeProvider } from "@/src/context/ThemeContext";
 import StoreInitializer from "@/src/component/StoreInitializer";
@@ -60,6 +61,12 @@ const themeScript = `
   })();
 `;
 
+const myCustomFont = localFont({
+  src: "./fonts/RINGW.woff2",
+  variable: "--font-custom",
+  display: "swap",  
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -71,7 +78,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 `}
+        className={`
+          ${myCustomFont.variable} font-sans antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 
+          `}
       >
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <AmbientBackground />

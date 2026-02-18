@@ -8,6 +8,7 @@
 
 @theme {
   /* 如果你有自定義的 theme 變數可以放這裡 */
+  --font-sans: var(--font-custom), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 html, body {
@@ -21,6 +22,8 @@ body::-webkit-scrollbar {
 }
 /* 1. 預設狀態 (Light Mode) */
 body {
+  font-family: var(--font-custom), ui-sans-serif, system-ui, sans-serif;
+
   background-color: transparent; /* 讓背景圖透出來 */
   @apply text-gray-900 transition-colors duration-300;
 }
@@ -31,6 +34,7 @@ body {
   background-color: transparent; /* 確保這裡也是透明 */
   @apply text-gray-100; /* 強制文字變白 */
 }
+
 
 /* .perspective-container {
   perspective: 1000px;
