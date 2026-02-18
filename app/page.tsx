@@ -2,7 +2,7 @@
 
 /* import PhotoCard from "@/src/component/PhotoCard"; */
 import { photos, Photo } from "@/src/data/photo";
-import ContactForm from "@/src/component/ContactForm";
+//import ContactForm from "@/src/component/ContactForm";
 import { useState, useMemo, useCallback } from "react";
 import Image from "next/image";
 import Modal from "@/src/component/Modal";
@@ -11,6 +11,9 @@ import { Search } from "lucide-react";
 
 import ErrorBoundary from "@/src/component/ErrorBoundary";
 import VirtualizedPhotoGrid from "@/src/component/VirtualizedPhotoGrid";
+
+import { useGalleryLogic } from "@/src/hooks/useGalleryLogic";
+import ContactForm from "@/src/component/ContactForm";
 
 
 /* const expensiveCalculation = (data: Photo[]) => {
@@ -24,43 +27,55 @@ import VirtualizedPhotoGrid from "@/src/component/VirtualizedPhotoGrid";
 
 
 export default function Home() {
+  // 導入 Custom Hook
+  const {
+    searchTerm,
+    filteredPhotos,
+    selectedPhoto,
+    handleSearchChange,
+    handlePhotoClick,
+    handleCloseModal
+  } = useGalleryLogic(photos);
+
+
+
   // 紀錄當前輩點選的照片，如果是 unl凹代表沒打開 Lightbox
-  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null)
+  //const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null)
 
   // Phase4. 搜尋狀態新增
-  const [searchTerm, setSearchTerm] = useState('');
+  //const [searchTerm, setSearchTerm] = useState('');
 
   // Phase4. 篩選邏輯 (無使用 useMemo 的版本)
   /* console.log('--- Home Component Rendered ---'); */
 
   // Phase4.3 使用useMemo優化
   // 語法: const cachedValue = useMemo(() => { 計算邏輯 }, [ 依賴陣列 ]);
-  const filteredPhotos = useMemo(() => {
+  //const filteredPhotos = useMemo(() => {
     /* console.log(' Running Expensive Filter... (Re-calculating)'); */
-    return photos.filter((photo) => 
+   /*  return photos.filter((photo) => 
       photo.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
+   */
     // Phase4. 執行昂貴計算 (模擬效能頻瓶頸)  
    /* return expensiveCalculation(result); */
 
-  },[searchTerm]); // <--- 只有當searchTerm 改變時，才允許重新計算
+ // },[searchTerm]); // <--- 只有當searchTerm 改變時，才允許重新計算
   // 注意：這裡我們依賴了 photos (外部常數) 和 searchTerm。
   // 如果 photos 是從 props 傳進來的，也要加進依賴陣列。
 
   // useCallback 凍結函式
   // 只要依賴陣列 [] 沒變，這個 handlePhotoClick 就永遠是同一個記憶體位址
-  const handlePhotoClick = useCallback((photo: Photo) => {
+  /* const handlePhotoClick = useCallback((photo: Photo) => {
     setSelectedPhoto(photo);
   }, []);
-
+ */
   
 
   return (
    <main className="h-screen flex flex-col p-8 max-w-7xl mx-auto overflow-hidden">
 
     <header className="mb-8 shrink-0 px-4">
-      <h1 className="text-4xl font-bold mb-4 text-gray-200 dark:text-white">Gallery</h1>
+      <h1 className="text-4xl font-bold mb-4 text-gray-200 dark:text-white">The Journey of Magic</h1>
       <p className="text-gray-400 dark:text-gray-400">Explore the collection.</p>
 
       {/*  Phase4. 搜尋框 */}
@@ -70,7 +85,7 @@ export default function Home() {
         type="text"
         placeholder="Search photos..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleSearchChange} // 使用 Hook 提供的 handler
         className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500
         outline-none transition-all"
       />
@@ -118,7 +133,7 @@ export default function Home() {
       {/* Lightbox (重用 Modal) */}
       <Modal
         isOpen={!!selectedPhoto} // 只要 selectedPhoto 有值就是 true
-        onClose={() => setSelectedPhoto(null)} // 關閉清空狀態
+        onClose={handleCloseModal} // 關閉清空狀態
         title={selectedPhoto?.title}
       >
         {selectedPhoto && (
@@ -143,9 +158,7 @@ export default function Home() {
       </Modal>
 
       {/* 聯絡表單 (Phase 2.3 add) */}
-      {/* <div className="border-t border-gray-200 dark:border-gray-800 pt-10">
-        <ContactForm />
-      </div> */}
+     {/*  <ContactForm /> */}
    </main>
   );
 }
