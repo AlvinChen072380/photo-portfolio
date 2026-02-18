@@ -60,7 +60,7 @@ const MouseTracker = () => {
    // 4.為了驗證 React 沒有渲染，增加一個 Ref 計數器
   const renderCount = useRef(0);
   // 使用Ref，直接操作 DOM context 來顯示滑鼠移動座標
-  const textRef = useRef<HTMLSpanElement>(null); 
+  const textRef = useRef<HTMLDivElement>(null); 
 
 
   // Lab 2 靜脈監聽 (Silent Listening)
