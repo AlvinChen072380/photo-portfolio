@@ -10,7 +10,15 @@
   /* 如果你有自定義的 theme 變數可以放這裡 */
 }
 
+html, body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
 
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Edge */
+}
 /* 1. 預設狀態 (Light Mode) */
 body {
   background-color: transparent; /* 讓背景圖透出來 */
@@ -24,17 +32,7 @@ body {
   @apply text-gray-100; /* 強制文字變白 */
 }
 
-/* 針對 Chrome, Safari 和 Edge (WebKit 引擎) */
-.hide-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-/* 針對 Firefox 和 IE/Edge (舊版) */
-.hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
 /* .perspective-container {
   perspective: 1000px;
 } */
+
