@@ -42,7 +42,7 @@ export default function Navbar(/* { totalLikes }:NavbarProps */) {
             className="flex items-center gap-2 font-bold text-xl text-gray-900 dark:text-white"
           >
             <Camera className="w-6 h-6" />
-            <span>PhotoFolio</span>
+            <span>Mordor-Gallery</span>
           </Link>
 
           {/* 
@@ -112,6 +112,18 @@ export default function Navbar(/* { totalLikes }:NavbarProps */) {
             Welcome to <strong>PhotoFolio</strong>, a conceptual photography portfolio built to demonstrate advanced React patterns.
           </p>
           <ul className="list-disc list-inside space-y-2 text-sm">
+            <li>Next.js 15 (App Router)</li>
+            <li>React Portals & Context API</li>
+            <li>Tailwind CSS v4 Dark Mode</li>
+            <li>TypeScript & Custom Hooks</li>
+            <li>Next.js 15 (App Router)</li>
+            <li>React Portals & Context API</li>
+            <li>Tailwind CSS v4 Dark Mode</li>
+            <li>TypeScript & Custom Hooks</li>
+            <li>Next.js 15 (App Router)</li>
+            <li>React Portals & Context API</li>
+            <li>Tailwind CSS v4 Dark Mode</li>
+            <li>TypeScript & Custom Hooks</li>
             <li>Next.js 15 (App Router)</li>
             <li>React Portals & Context API</li>
             <li>Tailwind CSS v4 Dark Mode</li>
