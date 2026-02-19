@@ -69,7 +69,7 @@ export default function Modal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity h-dvh"
         onClick={onClose}
       />
 
@@ -107,7 +107,7 @@ export default function Modal({
           </div>
 
           {/* Content */}
-          <div className="p-6 text-gray-600 dark:text-gray-300 max-h-[70vh] overflow-y-auto">{children}</div>
+          <div className="p-6 text-gray-600 dark:text-gray-300 min-h-[40dvh] overflow-y-auto">{children}</div>
         </motion.div>
       </div>
     </>

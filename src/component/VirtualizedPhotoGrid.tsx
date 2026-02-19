@@ -74,11 +74,15 @@ export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
       {width > 0 && height > 0 ? (
         (() => {
           // RWD 邏輯
+          const gap = 16;
           let columnCount = 1;
-          if (width >= 1024) columnCount = 3;
-          else if (width >= 768) columnCount = 2;
 
-          const columnWidth = width / columnCount;
+          if (width >= 1280) columnCount = 4;
+          else if (width >= 1024) columnCount = 3;
+          else if (width >= 640) columnCount = 2;
+          else columnCount = 1;          
+
+          const columnWidth = (width - (gap * (columnCount -1 ))) / columnCount;
           // 調整列高 (這裡可以依需求微調 +100 或 +120)
           const rowHeight = columnWidth * 0.80 + 120; 
           const rowCount = Math.ceil(photos.length / columnCount);
