@@ -26,7 +26,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),//網址部署Vercel後要改回
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://photo-portfolio-nine-theta.vercel.app/"),//網址部署Vercel後要改回
 
   title: {
     default: "Magic Portfolio | Immersive E-commerce Experience",

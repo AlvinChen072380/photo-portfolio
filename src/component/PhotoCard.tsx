@@ -54,12 +54,12 @@ function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
         />
 
         {/* 漸層遮罩與標題 - hover 時才會出現 */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-4 justify-between">
-          <h3 className="text-white font-medium text-lg translate-y-4 transition-transform duration-300 group-hover:translate-y-0">
+        <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 flex items-end p-4 justify-between">
+          <h3 className="text-white font-medium lg:text-lg translate-y-4 transition-transform duration-300 group-hover:translate-y-0 mb-4 text-base opacity-100 lg:opacity-100">
             {photo.title}
           </h3>
           {/* prop drilling sample */}     
-          <div className=" relative translate-y-4 pr-12 transition-transform duration-300 group-hover:translate-y-0 delay-75 ">           
+          <div className=" relative translate-y-4 pr-12 transition-transform duration-300 group-hover:translate-y-0 delay-75 mb-4">           
               <LikeButton photoId={photo.id} />                           
           </div>   
 
@@ -69,7 +69,7 @@ function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="absolute bottom-4 right-4 p-2 bg-white text-black rounded-full shadow-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-800 hover:text-white"
+              className="absolute bottom-4 right-4 p-2 mb-4 bg-white text-black rounded-full shadow-lg translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-800 hover:text-white"
               title="Add to Cart"
             >
               <Plus className="w-5 h-5"/>
