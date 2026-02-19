@@ -68,13 +68,14 @@ export default function Modal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm h-dvh"
+        transition={{ duration: 0.2 }}
+        className="fixed inset-0 z-60 bg-black/60 backdrop-blur-sm"
+        style={{ willChange: "opacity" }}
         onClick={onClose}
       />
 
       {/* Modal 本體 - 居中顯示 */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">{/* pointer-events-none 的意思是：
+      <div className="fixed inset-0 z-70 flex items-center justify-center p-4 pointer-events-none">{/* pointer-events-none 的意思是：
           「我是透明人，滑鼠點擊請穿過我，去點後面的東西（也就是上面的背景遮罩）」
           這解決了「點背景沒反應」的問題。
       */}
@@ -83,8 +84,8 @@ export default function Modal({
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          style={{ willChange: "transform, opacity" }}
           className={`   
             w-full ${maxWidthClasses[maxWidth]}         
             bg-white dark:bg-gray-900 rounded-2xl shadow-2xl  border border-gray-100 dark:border-gray-800 pointer-events-auto transition-colors`}
