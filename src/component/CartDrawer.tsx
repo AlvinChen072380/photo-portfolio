@@ -16,16 +16,23 @@ const backdropVariants = {
 };
 
 const drawerVariants = {
-  hidden: { x: "100%", opacity: 0.5 },
+  hidden: { x: "100%", opacity: 0.2 },
   visible: {
     x: 0,
     opacity: 1,
-    transition: { type: "spring" as const, damping: 30, stiffness: 300 },
+    transition: { 
+      type: "tween" as const, 
+      /* damping: 30, stiffness: 120 */
+      ease: "easeInOut", 
+      duration: 0.6},
   },
   exit: {
     x: "100%",
     opacity: 0,
-    transition: { duration: 0.2, ease: "easeIn" as const },
+    transition: {       
+      type: "tween",
+      duration: 0.2, 
+      ease: "easeInOut" as const },
   },
 };
 
@@ -62,7 +69,7 @@ export default function CartDrawer() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 bg-black/50 transition-opacity"
+            className="fixed inset-0 bg-black/50 "
             onClick={closeCart}
           />
 
@@ -73,7 +80,7 @@ export default function CartDrawer() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white dark:bg-gray-900 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out">
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white dark:bg-gray-900 shadow-2xl flex flex-col">
             {/* Header */}
             <div className="p-4 border-b dark:border-gray-800 flex items-center justify-between">
               <h2 className="text-lg font-bold flex items-center gap-2">
@@ -183,7 +190,7 @@ export default function CartDrawer() {
                 <Link
                   href="/checkout"
                   onClick={closeCart}
-                  className="block w-full py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-bold text-center hover:opacity-90 transition-opacity"
+                  className="block w-full py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-bold text-center hover:opacity-90"
                 >
                   Checkout
                 </Link>

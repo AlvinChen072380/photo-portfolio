@@ -68,8 +68,13 @@ function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
               onClick={handleAddToCart}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="absolute bottom-4 right-4 p-2 mb-4 bg-white text-black rounded-full shadow-lg translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-800 hover:text-white"
+              transition={{ 
+                type: "spring", 
+                stiffness: 400, 
+                damping: 10,
+                y: { duration: 0.3, ease: "easeOut" }
+              }}
+              className="absolute bottom-4 right-4 p-2 bg-white text-black rounded-full shadow-lg hover:bg-gray-800 hover:text-white"
               title="Add to Cart"
             >
               <Plus className="w-5 h-5"/>
