@@ -6,10 +6,10 @@ import { createPortal } from "react-dom";
 import { X, ShoppingBag, Trash2, Plus, Minus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 // 1.定義動畫變體 (同規格書一樣寫在外面)
-const backdropVariants = {
+const backdropVariants : Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
   exit: { opacity: 0 },
@@ -23,14 +23,14 @@ const drawerVariants = {
     transition: { 
       type: "tween" as const, 
       /* damping: 30, stiffness: 120 */
-      ease: "easeInOut", 
+      ease: "easeInOut" as const, 
       duration: 0.6},
   },
   exit: {
     x: "100%",
     opacity: 0,
     transition: {       
-      type: "tween",
+      type: "tween" as const,
       duration: 0.2, 
       ease: "easeInOut" as const },
   },
