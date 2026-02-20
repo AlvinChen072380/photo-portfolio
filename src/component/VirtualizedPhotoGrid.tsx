@@ -17,6 +17,27 @@ interface CellData {
   onPhotoClick: (photo: Photo) => void;
 }
 
+
+const Cell = memo(({ columnIndex, rowIndex, style, data }: GridChildComponentProps<CellData>) => {
+    const { columnCount, photos, onPhotoClick } = data;
+    const index = rowIndex * columnCount + columnIndex;
+
+    if (index >= photos.length) return null;
+
+    const photo = photos[index];
+
+    return (
+      <div style={style} className="p-2.5">
+        <PhotoCard
+          photo={photo}
+          priority={index < columnCount * 2}
+          onClick={() => onPhotoClick(photo)}         
+        />
+      </div>
+    );
+  });
+  Cell.displayName = "GridCell";
+
 export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
   // 1. 自製 AutoSizer 狀態
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,27 +60,7 @@ export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
     return () => {
       resizeObserver.disconnect();
     };
-  }, []);
-
-  const Cell = memo(({ columnIndex, rowIndex, style, data }: GridChildComponentProps<CellData>) => {
-    const { columnCount, photos, onPhotoClick } = data;
-    const index = rowIndex * columnCount + columnIndex;
-
-    if (index >= photos.length) return null;
-
-    const photo = photos[index];
-
-    return (
-      <div style={style} className="p-2.5">
-        <PhotoCard
-          photo={photo}
-          priority={index < columnCount * 2}
-          onClick={() => onPhotoClick(photo)}         
-        />
-      </div>
-    );
-  });
-  Cell.displayName = "GridCell";
+  }, []);  
 
   const { width, height } = dimensions;
 
