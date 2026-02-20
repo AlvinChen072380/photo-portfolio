@@ -48,13 +48,13 @@ function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
           src={photo.url}
           alt={photo.title}
           fill
-          className="object-cover will-change-transform duration-300 md:group-hover:scale-110"
+          className="object-cover md:will-change-transform md:duration-300 md:group-hover:scale-110"
           sizes="(max-width: 768px) 100dvw, (max-width: 1200px) 50dvw, 33dvw"
           priority={priority}
         />
 
         {/* 漸層遮罩與標題 - hover 時才會出現 */}
-        <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 flex items-end p-4 justify-between">
+        <div className="absolute md:bg-black/50 inset-0 md:transition-opacity md:duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 flex items-end p-4 justify-between">
           <h3 className="text-white font-medium text-base lg:text-base opacity-100 lg:opacity-100 mb-2">
             {photo.title}
           </h3>

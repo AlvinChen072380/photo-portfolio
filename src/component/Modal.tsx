@@ -69,8 +69,7 @@ export default function Modal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-60 bg-black/80 md:backdrop-blur-sm"
-        style={{ willChange: "opacity" }}
+        className="fixed inset-0 z-60 bg-black/80 md:backdrop-blur-sm will-change-auto"       
         onClick={onClose}
       />
 
@@ -88,7 +87,7 @@ export default function Modal({
           style={{ willChange: "transform, opacity" }}
           className={`   
             w-full ${maxWidthClasses[maxWidth]}         
-            bg-white dark:bg-gray-900 rounded-2xl shadow-2xl  border border-gray-100 dark:border-gray-800 pointer-events-auto transition-colors`}
+            bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-800 pointer-events-auto transition-colors`}
 
           // 阻止點擊本體時觸發背景關閉 (冒泡)
           onClick={(e) => e.stopPropagation()}
