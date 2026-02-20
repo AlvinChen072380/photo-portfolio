@@ -124,8 +124,8 @@ export default function LikeButton ({ photoId }: LikeButtonProps) {
       onClick={handleClick}
       className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors border cursor-pointer duration-300 hover:bg-gray-300 ${
         liked
-          ? 'bg-red-50 border-red-200 text-red-500'
-          : 'br-white border0gray-200 text-gray-600 hover:br-gray-50'
+          ? 'bg-red-50 border-red-200 text-red-500 md:hover:bg-red-50'
+          : 'bg-gray-200 border-gray-400 text-gray-400 md:hover:bg-red-50'
         }`}
     >
       <Heart className={`w-5 h-5 ${liked ? 'fill-current' : "" }`}/>

@@ -48,18 +48,18 @@ function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
           src={photo.url}
           alt={photo.title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-110"
+          className="object-cover will-change-transform duration-300 md:group-hover:scale-110"
           sizes="(max-width: 768px) 100dvw, (max-width: 1200px) 50dvw, 33dvw"
           priority={priority}
         />
 
         {/* 漸層遮罩與標題 - hover 時才會出現 */}
         <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 flex items-end p-4 justify-between">
-          <h3 className="text-white font-medium lg:text-lg translate-y-4 transition-transform duration-300 group-hover:translate-y-0 mb-4 text-base opacity-100 lg:opacity-100">
+          <h3 className="text-white font-medium text-base lg:text-base opacity-100 lg:opacity-100 mb-2">
             {photo.title}
           </h3>
           {/* prop drilling sample */}     
-          <div className=" relative translate-y-4 pr-12 transition-transform duration-300 group-hover:translate-y-0 delay-75 mb-4">           
+          <div className=" relative pr-12 transition-transform duration-300 group-hover:translate-y-0 delay-75">           
               <LikeButton photoId={photo.id} />                           
           </div>   
 
