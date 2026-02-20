@@ -4,7 +4,7 @@
 import { FixedSizeGrid as Grid, GridChildComponentProps } from "react-window";
 import { Photo } from "../data/photo";
 import PhotoCard from "./PhotoCard";
-import { useLayoutEffect, useRef, useState } from "react";
+import { memo, useLayoutEffect, useRef, useState } from "react";
 
 interface Props {
   photos: Photo[];
@@ -41,7 +41,7 @@ export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
     };
   }, []);
 
-  const Cell = ({ columnIndex, rowIndex, style, data }: GridChildComponentProps<CellData>) => {
+  const Cell = memo(({ columnIndex, rowIndex, style, data }: GridChildComponentProps<CellData>) => {
     const { columnCount, photos, onPhotoClick } = data;
     const index = rowIndex * columnCount + columnIndex;
 
@@ -54,12 +54,12 @@ export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
         <PhotoCard
           photo={photo}
           priority={index < columnCount * 2}
-          onClick={() => onPhotoClick(photo)}
-          key={photo.id}
+          onClick={() => onPhotoClick(photo)}         
         />
       </div>
     );
-  };
+  });
+  Cell.displayName = "GridCell";
 
   const { width, height } = dimensions;
 
