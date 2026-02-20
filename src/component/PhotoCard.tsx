@@ -48,7 +48,7 @@ function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
           src={photo.url}
           alt={photo.title}
           fill
-          className="object-cover md:will-change-transform md:duration-300 md:group-hover:scale-110"
+          className="object-cover will-change-transform duration-300 md:group-hover:scale-110"
           sizes="(max-width: 768px) 100dvw, (max-width: 1200px) 50dvw, 33dvw"
           priority={priority}
         />

@@ -55,6 +55,7 @@ export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
           photo={photo}
           priority={index < 4}
           onClick={() => onPhotoClick(photo)}
+          key={photo.id}
         />
       </div>
     );
@@ -96,6 +97,7 @@ export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
               rowHeight={rowHeight}
               width={width}
               itemData={{ columnCount, photos, onPhotoClick }}
+              overscanRowCount={2}
               className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               
             >
