@@ -53,7 +53,7 @@ export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
       <div style={style} className="p-2.5">
         <PhotoCard
           photo={photo}
-          priority={index < 4}
+          priority={index < columnCount * 2}
           onClick={() => onPhotoClick(photo)}
           key={photo.id}
         />
