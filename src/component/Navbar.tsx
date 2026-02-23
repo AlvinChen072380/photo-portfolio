@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import { useAppStore } from "../store/useAppStore";
 import { ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import AboutContent from "./AboutContent";
 
 
 /* interface NavbarProps {
@@ -107,37 +108,7 @@ export default function Navbar(/* { totalLikes }:NavbarProps */) {
         onClose={() => setIsAboutOpen(false)}
         title="About PhotoFolio"
       >
-        <div className="space-y-4">
-          <p>
-            Welcome to <strong>PhotoFolio</strong>, a conceptual photography portfolio built to demonstrate advanced React patterns.
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-sm">
-            <li>Next.js 15 (App Router)</li>
-            <li>React Portals & Context API</li>
-            <li>Tailwind CSS v4 Dark Mode</li>
-            <li>TypeScript & Custom Hooks</li>
-            <li>Next.js 15 (App Router)</li>
-            <li>React Portals & Context API</li>
-            <li>Tailwind CSS v4 Dark Mode</li>
-            <li>TypeScript & Custom Hooks</li>
-            <li>Next.js 15 (App Router)</li>
-            <li>React Portals & Context API</li>
-            <li>Tailwind CSS v4 Dark Mode</li>
-            <li>TypeScript & Custom Hooks</li>
-            <li>Next.js 15 (App Router)</li>
-            <li>React Portals & Context API</li>
-            <li>Tailwind CSS v4 Dark Mode</li>
-            <li>TypeScript & Custom Hooks</li>
-          </ul>
-          <div className="pt-4 flex justify-end">
-            <button
-              onClick={() => setIsAboutOpen(false)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer"
-            >
-              Got it!
-            </button>
-          </div>
-        </div>
+       <AboutContent onClose={() => setIsAboutOpen(false)}/>
       </Modal>
     </>
   );
