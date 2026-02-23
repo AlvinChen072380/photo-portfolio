@@ -107,7 +107,7 @@ export default function Modal({
           </div>
 
           {/* Content */}
-          <div className="p-6 text-gray-600 dark:text-gray-300 max-h-[68dvh] overflow-y-auto no-scrollbar">{children}</div>
+          <div className="p-6 text-gray-600 dark:text-gray-300 max-h-[75dvh] overflow-y-auto no-scrollbar">{children}</div>
         </motion.div>
       </div>
     </>
