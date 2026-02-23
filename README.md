@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🪄 Magic Portfolio 
 
-## Getting Started
+An immersive, high-performance photography portfolio and e-commerce platform built to demonstrate advanced front-end patterns and performance optimization techniques.
 
-First, run the development server:
+🌐 **Live Demo:** [(https://photo-portfolio-nine-theta.vercel.app/)]
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Key Features & Performance
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project is not just a standard UI slicing exercise. It tackles real-world performance bottlenecks:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **Handling 2500+ Items (List Virtualization):** Implemented `react-window` to render only the visible elements in the DOM, maintaining 60FPS scrolling performance even with massive datasets.
+* **Custom RWD Auto-Sizer:** Instead of relying on buggy third-party wrappers, I wrote a custom `ResizeObserver` hook to perfectly calculate responsive grid columns and row heights without layout shifts or flickers.
+* **Zero-API Backend:** Utilized **Next.js Server Actions** to handle contact form submissions and server-side validation without deploying a separate Node.js backend.
+* **Optimized Typographic Loading:** Integrated `next/font` with Tailwind v4 variables to load custom fonts (Ringw) while eliminating Cumulative Layout Shift (CLS).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Tech Stack
 
-## Learn More
+**Core Architecture**
+* **Next.js 16 (App Router):** Server-First architecture, Metadata API for SEO.
+* **React 19:** Utilizing modern hooks (`useActionState`, `useFormStatus`).
+* **TypeScript:** Strict typing for stable and predictable code.
 
-To learn more about Next.js, take a look at the following resources:
+**State Management & Logic**
+* **Zustand (with Persist):** Lightweight global state management for the shopping cart and dark mode, synced with LocalStorage.
+* **Custom Hooks:** Abstracted complex logic (e.g., `useDebounce` for search, `useGalleryLogic`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Styling & UI**
+* **Tailwind CSS v4:** Modern `@theme` architecture and system-aware Dark Mode.
+* **Framer Motion:** Smooth, physics-based micro-interactions and modal animations.
+* **Lucide React:** Clean and consistent iconography.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💻 Getting Started (Local Development)
 
-## Deploy on Vercel
+To run this project on your local machine:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/AlvinChen072380/photo-portfolio](https://github.com/AlvinChen072380/photo-portfolio)
