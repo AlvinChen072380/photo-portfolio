@@ -55,7 +55,7 @@ function PhotoCard({ photo, onClick, priority = false }: PhotoCardProps) {
 
         {/* 漸層遮罩與標題 - hover 時才會出現 */}
         <div className="absolute md:bg-black/50 inset-0 md:transition-opacity md:duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 flex items-end p-4 justify-between">
-          <h3 className="text-white font-medium text-base lg:text-base opacity-100 lg:opacity-100 mb-2">
+          <h3 className="text-white font-medium text-base lg:text-base opacity-100 lg:opacity-100 mb-2 truncate">
             {photo.title}
           </h3>
           {/* prop drilling sample */}     

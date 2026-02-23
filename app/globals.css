@@ -16,6 +16,9 @@ html, body {
     scrollbar-width: none;     /* Firefox */
     scrollbar-gutter: stable;
     overscroll-behavior: none;
+   .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  } 
 }
 
 html::-webkit-scrollbar, 

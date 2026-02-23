@@ -75,8 +75,8 @@ export default function Home() {
    <main className="h-screen flex flex-col p-8 max-w-7xl mx-auto overflow-hidden">
 
     <header className="mb-8 shrink-0 px-4">
-      <h1 className="text-4xl font-bold mb-4 text-gray-200 dark:text-white">The Journey of Magic</h1>
-      <p className="text-gray-400 dark:text-gray-400">Explore the collection.</p>
+      <h1 className="text-3xl me:text-4xl lg:text-5xl font-bold mb-4 text-gray-200 dark:text-white">The Journey of Magic</h1>
+      <p className="text-sm md:text-base text-gray-400 dark:text-gray-400">Explore the collection.</p>
 
       {/*  Phase4. 搜尋框 */}
       <div className="relative max-w-md pt-3">
@@ -137,18 +137,18 @@ export default function Home() {
         title={selectedPhoto?.title}
       >
         {selectedPhoto && (
-          <div className="space-y-4">
-            <div className="relative aspect-video w-full bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+          <div className="space-y-4 max-h-[90dvh]">
+            <div className="relative aspect-video w-full bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden min-h-[50dvh]">
               <Image
                 src={selectedPhoto.url}
                 alt={selectedPhoto.title}
                 fill
-                className="object-contain"
+                className="object-cover"
                 priority
               />
             </div>
             <div className="flex justify-between items-center">              
-                <span className="text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full cursor-pointer">
+                <span className="text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full truncate">
                   {selectedPhoto.category}
                 </span>
                 <LikeButton photoId={selectedPhoto.id}/>  

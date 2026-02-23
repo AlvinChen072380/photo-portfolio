@@ -69,7 +69,7 @@ export default function Modal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-60 bg-black/80 md:backdrop-blur-sm will-change-auto"       
+        className="fixed inset-0 z-60 bg-black/80 md:backdrop-blur-sm will-change-auto "       
         onClick={onClose}
       />
 
@@ -94,7 +94,7 @@ export default function Modal({
         >
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white truncate">
               {title || "Info"}
             </h3>
             <button
@@ -107,7 +107,7 @@ export default function Modal({
           </div>
 
           {/* Content */}
-          <div className="p-6 text-gray-600 dark:text-gray-300 min-h-[40dvh] overflow-y-auto">{children}</div>
+          <div className="p-6 text-gray-600 dark:text-gray-300 max-h-[60dvh] overflow-y-auto no-scrollbar">{children}</div>
         </motion.div>
       </div>
     </>
