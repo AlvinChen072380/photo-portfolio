@@ -137,8 +137,8 @@ export default function Home() {
         title={selectedPhoto?.title}
       >
         {selectedPhoto && (
-          <div className="space-y-4 max-h-[70dvh]">
-            <div className="relative aspect-video w-full bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden min-h-[45dvh]">
+          <div className="space-y-4 min-h-[75dvh]">
+            <div className="relative aspect-video w-full bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden min-h-[55dvh]">
               <Image
                 src={selectedPhoto.url}
                 alt={selectedPhoto.title}
