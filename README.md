@@ -29,6 +29,23 @@ This project is not just a standard UI slicing exercise. It tackles real-world p
 * **Framer Motion:** Smooth, physics-based micro-interactions and modal animations.
 * **Lucide React:** Clean and consistent iconography.
 
+## 🛒 E-Commerce & Full-Stack Architecture
+
+This project goes beyond a static frontend by implementing a secure, full-stack order processing system using **Next.js Server Components** and **Supabase (PostgreSQL)**.
+
+* **State Management & Checkout Logic:**
+    * Utilized **Zustand** for lightweight, global cart state management, allowing seamless data extraction during the checkout process.
+    * **Custom Order ID Generation:** Instead of exposing database UUIDs or sequential IDs, I implemented a custom algorithm (`ORD-{timestamp}-{random}`). This significantly improves UX for customer support while protecting business intelligence (hiding daily order volumes from competitors).
+* **Database Design (`jsonb`):**
+    * Leveraged PostgreSQL's powerful **`jsonb`** column type to store complex cart arrays directly into a single database row. This approach eliminates the need for complex SQL `JOIN` operations, keeping the MVP agile and highly performant.
+* **Strict Security & Row Level Security (RLS):**
+    * Configured rigorous RLS policies in Supabase. The public checkout route is restricted to `INSERT-only` operations for `anon` (unauthenticated) users, ensuring malicious actors cannot `SELECT` or modify other customers' data.
+* **Server-Side Admin Dashboard:**
+    * Built a dedicated `/admin` dashboard relying entirely on **Next.js Server Components**.
+    * **Secure Credential Separation:** Strictly separated environment variables. Public keys (`NEXT_PUBLIC_`) are used for client-side checkouts, while a highly privileged `service_role` key is safely isolated on the server.
+    * Implemented `export const dynamic = 'force-dynamic'` to opt out of static caching, ensuring the admin dashboard fetches real-time, up-to-date order data directly from the database without exposing endpoints to the browser.
+
+
 ## 💻 Getting Started (Local Development)
 
 To run this project on your local machine:
