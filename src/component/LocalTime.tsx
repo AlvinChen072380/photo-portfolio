@@ -8,7 +8,7 @@ export default function LocalTime({ dateString }: { dateString: string }) {
   useEffect(() => {
     try {
       // 1. 確認瀏覽器收到的字串
-      console.log("👉 1. 資料庫原始時間:", dateString);
+      //console.log("👉 1. 資料庫原始時間:", dateString);
 
       // 2. 轉換成 Date 物件
       const dateObj = new Date(dateString);
@@ -28,7 +28,7 @@ export default function LocalTime({ dateString }: { dateString: string }) {
       const time = formatter.format(dateObj);
       
       // 4. 印出最終結果，確認瀏覽器有沒有算錯
-      console.log("✅ 2. 瀏覽器算出的台灣時間:", time);
+      //console.log("✅ 2. 瀏覽器算出的台灣時間:", time);
       
       // 5. 更新畫面
       setFormattedTime(time);
@@ -41,5 +41,5 @@ export default function LocalTime({ dateString }: { dateString: string }) {
   if (!formattedTime) return <span className="text-gray-400">計算中...</span>;
 
   // 我加上了綠色，如果畫面變綠色，代表這段新程式碼 100% 成功蓋過 Vercel 舊快取了
-  return <span className="font-bold text-green-600 dark:text-green-400">{formattedTime}</span>;
+  return <span className="font-bold text-gray-800 dark:text-gray-100">{formattedTime}</span>;
 }
