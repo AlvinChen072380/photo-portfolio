@@ -70,7 +70,7 @@ export default async function AdminDashboard() {
                         hour: '2-digit',
                         minute: '2-digit',
                         second: '2-digit',
-                        hour12: false // 使用 24 小時制
+                        hour12: true // 使用 24 小時制
                       })}
                     </td>
                     <td className="p-4">
