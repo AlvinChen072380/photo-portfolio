@@ -2,6 +2,7 @@
 import { supabaseAdmin } from "@/src/lib/supabase"; // 確保路徑正確
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import LocalTime from "@/src/component/LocalTime";
 
 // 🚀 關鍵設定：強制 Next.js 每次有人訪問這頁時，都去資料庫抓最新資料，不要用舊的庫存畫面
 export const dynamic = 'force-dynamic';
@@ -62,16 +63,7 @@ export default async function AdminDashboard() {
                       {order.order_number || 'N/A'}
                     </td>
                     <td className="p-4 text-sm text-gray-500">
-                      {new Date(order.created_at).toLocaleString('zh-TW', {
-                        timeZone: 'Asia/Taipei', // 強制轉換為台灣時區
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                        hour12: true // 使用 24 小時制
-                      })}
+                     <LocalTime dateString={order.created_at} />
                     </td>
                     <td className="p-4">
                       <div className="font-medium text-gray-900 dark:text-white">{order.customer_name}</div>
