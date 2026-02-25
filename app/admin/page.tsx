@@ -62,7 +62,16 @@ export default async function AdminDashboard() {
                       {order.order_number || 'N/A'}
                     </td>
                     <td className="p-4 text-sm text-gray-500">
-                      {new Date(order.created_at).toLocaleDateString()} {new Date(order.created_at).toLocaleTimeString()}
+                      {new Date(order.created_at).toLocaleString('zh-TW', {
+                        timeZone: 'Asia/Taipei', // 強制轉換為台灣時區
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false // 使用 24 小時制
+                      })}
                     </td>
                     <td className="p-4">
                       <div className="font-medium text-gray-900 dark:text-white">{order.customer_name}</div>
