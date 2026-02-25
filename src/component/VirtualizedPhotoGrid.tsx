@@ -48,7 +48,7 @@ export default function VirtualizedPhotoGrid({ photos, onPhotoClick }: Props) {
     if (!containerRef.current) return;
 
     const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (const entry of entries) {
         // 取得容器的寬高
         const { width, height } = entry.contentRect;
         setDimensions({ width, height });

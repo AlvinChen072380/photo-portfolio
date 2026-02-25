@@ -1,6 +1,5 @@
 'use client'
 
-import { span } from "framer-motion/client";
 import { useState, useEffect } from "react";
 
 
@@ -13,6 +12,7 @@ export default function Footer() {
 
   // 2. 在 useEffect 裡才隨機生成數 (確保在 Client 端執行)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRandomId(Math.random());
   }, []);
 

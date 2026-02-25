@@ -50,7 +50,7 @@ useAppStore.subscribe((state, prevState) => {
 
   if (saveTimer) clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
-    console.log('💾 Saving Likes to LocalStorage... (Debounced)');
+   // console.log('💾 Saving Likes to LocalStorage... (Debounced)');
     localStorage.setItem('photo_likes_store', JSON.stringify(state.likes));    
   }, 1000);  
 });
@@ -62,7 +62,7 @@ useAppStore.subscribe((state, prevState) =>{
 
   if (cartSaveTimer) clearTimeout(cartSaveTimer);
   cartSaveTimer = setTimeout(() => {
-    console.log('🛒 Saving Cart to LocalStorage... (Debounced)');
+    //console.log('🛒 Saving Cart to LocalStorage... (Debounced)');
     localStorage.setItem('shopping_cart', JSON.stringify(state.cart));    
   }, 1000)
 });

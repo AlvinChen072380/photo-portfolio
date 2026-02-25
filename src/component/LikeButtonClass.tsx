@@ -10,6 +10,7 @@ interface State {
 }
 
 // 2.定義Props 的形狀
+//eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface Props {}
 
 // 3.繼承 React.Component <Props, State>

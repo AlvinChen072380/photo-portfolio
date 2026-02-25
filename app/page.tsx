@@ -1,9 +1,9 @@
 'use client'
 
 /* import PhotoCard from "@/src/component/PhotoCard"; */
-import { photos, Photo } from "@/src/data/photo";
+import { photos} from "@/src/data/photo";
 //import ContactForm from "@/src/component/ContactForm";
-import { useState, useMemo, useCallback } from "react";
+//import { useState, useMemo, useCallback } from "react";
 import Image from "next/image";
 import Modal from "@/src/component/Modal";
 import LikeButton from "@/src/component/LikeButton";
@@ -13,7 +13,7 @@ import ErrorBoundary from "@/src/component/ErrorBoundary";
 import VirtualizedPhotoGrid from "@/src/component/VirtualizedPhotoGrid";
 
 import { useGalleryLogic } from "@/src/hooks/useGalleryLogic";
-import ContactForm from "@/src/component/ContactForm";
+//import ContactForm from "@/src/component/ContactForm";
 
 
 /* const expensiveCalculation = (data: Photo[]) => {

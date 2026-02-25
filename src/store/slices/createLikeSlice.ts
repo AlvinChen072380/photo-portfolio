@@ -1,4 +1,5 @@
 import { StateCreator } from "zustand";
+import { AppState} from "../useAppStore";
 
 export interface LikesSlice {
   likes: Record<string, boolean>;
@@ -6,7 +7,7 @@ export interface LikesSlice {
   initLikes: (storedLikes: Record<string, boolean>) => void;
 }
 
-export const createLikesSlice: StateCreator<any, [], [], LikesSlice> = (set) => ({
+export const createLikesSlice: StateCreator<AppState, [], [], LikesSlice> = (set) => ({
   likes: {},
   toggleLike: (id) =>
     set((state: LikesSlice) => ({

@@ -29,6 +29,7 @@ export default function Navbar(/* { totalLikes }:NavbarProps */) {
   // 1.控制 Modal 開關的狀態
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
   return (

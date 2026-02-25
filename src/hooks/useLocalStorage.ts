@@ -13,6 +13,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       if (item) {
         // 如果有值，解析並更新 State
         //JSON.parse 是為了支援物件、數字等各種格式，不只是字串
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setValue(JSON.parse(item));
       }
     } catch (error) {

@@ -15,6 +15,7 @@ export default function AmbientBackground() {
 
   // Hydration fix
   const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
   // 2.狀態挑選機邏輯 (State Machine Logic)

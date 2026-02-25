@@ -49,6 +49,7 @@ export default function CartDrawer() {
 
   // 2.解決 Hydration 問題 (確保只在 Client 端渲染 Portal)
   const [mounted, setMounted] = useState<boolean>(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
   // 3.計算總金額 (假設每張 $50)

@@ -1,7 +1,7 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
-import { Send, Mail, MessageSquare, Loader2 } from "lucide-react";
+//import { FormEvent, useRef, useState } from "react";
+import { Send, Loader2 } from "lucide-react";
 import { sendEmail } from "../actions/sendEmail";
 import { useFormStatus } from "react-dom";
 import { useActionState } from "react"; 

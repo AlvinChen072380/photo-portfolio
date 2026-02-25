@@ -13,7 +13,7 @@ import CartDrawer from "@/src/component/CartDrawer";
 import AmbientBackground from "@/src/component/AmbientBackground";
 import ContactForm from "@/src/component/ContactForm";
 
-import Footer from "@/src/component/Footer";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

@@ -43,6 +43,7 @@ export default function LikeButton ({ photoId }: LikeButtonProps) {
   //const liked = isLiked(photoId);
 
  useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   setIsMounted(true);
  }, []);
 

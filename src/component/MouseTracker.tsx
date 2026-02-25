@@ -18,7 +18,7 @@ const MouseTracker = () => {
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig); 
   // 顏色漸變 Mapping
-  const color = useTransform(x, [0, 500], ["#ff0000", "#0000ff"]);
+  //const color = useTransform(x, [0, 500], ["#ff0000", "#0000ff"]);
   // 速度變形
   // 取得 X 軸的速度
   const xVelocity = useVelocity(springX);
@@ -122,7 +122,7 @@ const MouseTracker = () => {
     <div className="fixed inset-0 pointer-events-none z-50">
       {/* 顯示渲染次數 (驗證畫面動作狀況) */}
       <div className="absolute top-1 left-45 bg-black/80 text-white p-1 rounded shadow-lg font-mono">
-        React Render Count: {renderCount.current}
+        {/* React Render Count: {renderCount.current} */}
       </div>
       <div 
         ref={textRef}
