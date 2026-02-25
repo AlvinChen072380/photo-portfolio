@@ -2,7 +2,7 @@
 import { ImageResponse } from 'next/og';
 
 // 設定圖片尺寸
-export const runtime = 'edge';
+//export const runtime = 'edge';
 export const alt = 'Magic Portfolio Preview';
 export const size = {
   width: 1200,
