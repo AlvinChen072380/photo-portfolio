@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation"; // 'next/router' 是*舊版引用�
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "@/src/lib/supabase";
+
 
 
 
@@ -25,23 +27,72 @@ export default function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const [orderNumber, setOrderNumber] = useState("");
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+  });
+
   useEffect(() => setMounted(true), []);
 
   const totalPrice = cart.reduce((sum, item) => sum + item.quantity * 50, 0 );
 
+  // 訂單編號函式
+  const generateOrderNumber = () => {
+    const prefix = "ORD-";
+    const timestamp = Date.now().toString().slice(-6);
+    const random = Math.floor(1000 + Math.random() * 9000);
+    return `${prefix}${timestamp}-${random}`;
+  }
+
+
   // 模擬結帳送出
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (cart.length === 0) return;
+
     setIsSubmitting(true);
+    /* console.log("網址 URL 測試:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+    console.log("通行證 KEY 測試:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY); */
 
     // 模擬 API 請求延遲 (2秒)
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+   /*  await new Promise((resolve) => setTimeout(resolve, 2000)); */
+   try {
+    // 組合姓名
+    const fullName = `${formData.firstName} ${formData.lastName}`.trim();
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+    const newOrderNum = generateOrderNumber();
+    setOrderNumber(newOrderNum);
 
-    // 結帳成功後清空購物車
+    // 建立 Supabase 訂單物件
+    const orderData = {
+      order_number: newOrderNum,
+      customer_name: fullName,
+      customer_email: formData.email,
+      total_amount: totalPrice,
+      status: 'pending',
+      items: cart,
+    };
+
+    // 發送至 Supabase
+    const { error } = await supabase
+      .from('orders') // 資料表名稱
+      .insert([orderData]); //資料為陣列格式
+
+    if (error) throw error;
+
+    // 成功: 顯示成功畫面並清空購物車
+    setIsSuccess(true);    
     clearCart();
+   } catch (error) {
+    console.error('Checkout failed', error);
+    alert('Sorry, something went wrong with your order. Please try again.')
+   } finally {
+    setIsSubmitting(false);    
+   }    
   };
 
   // 如果還沒 Mount，顯示 Loading 避免畫面閃爍
@@ -59,6 +110,15 @@ export default function CheckoutPage() {
           <p className="text-gray-500 mb-8">
             Thank you for your purchase. We&apos;ll send you a confirmation email shortly.
           </p>
+
+          {/* 訂單編號顯示 */}
+          <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 mb-8 border border-gray-100 dark:border-gray-700">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Your Order Number</p>
+            <p className="font-mono font-bold text-xl text-gray-900 dark:text-white tracking-wider">
+              {orderNumber}
+            </p>
+          </div>
+
           <button
             onClick={() => router.push('/')}
             className="w-full py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-bold hover:opacity-70 transition-opacity cursor-pointer"
@@ -102,21 +162,41 @@ return (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">First Name</label>
-                    <input required type="text" placeholder="First Name" className="w-full px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-black-700 dark:focus:ring-white outline-none transition-all
+                    <input 
+                      required type="text" 
+                      placeholder="First Name" 
+                      value={formData.firstName} 
+                      onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                      className="w-full px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-black-700 dark:focus:ring-white outline-none transition-all
                     "/>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
-                    <input required type="text" placeholder="Last Name" className="w-full px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" />
+                    <input 
+                      required type="text" 
+                      placeholder="Last Name" 
+                      value={formData.lastName} 
+                      onChange={(e) => setFormData({...formData, lastName: e.target.value})}
+                      className="w-full px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                  <input required type="email" placeholder="Email" className="w-full px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" />
+                  <input 
+                    required type="email" 
+                    placeholder="Email" 
+                    value={formData.email} 
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
-                  <input required type="text" placeholder="Address" className="w-full px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" />
+                  <input 
+                    required type="text" 
+                    placeholder="Address" 
+                    value={formData.address} 
+                    onChange={(e) => setFormData({...formData, address: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" />
                 </div>
               </form>
             </section>
